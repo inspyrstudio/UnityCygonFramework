@@ -1,3 +1,5 @@
+// Copyright 2026 Inspyr Studio, SAS. All Rights Reserved.
+
 using UnityEngine;
 using UnityEditor;
 using System.IO;
