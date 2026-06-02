@@ -370,7 +370,7 @@ public class EditorImporter_USDA : ScriptedImporter
 
         for (int i = 0; i < totalIndices; i += 3)
         {
-            int[] permutation = new int[] { 0, 2, 1 };
+            int[] permutation = new int[] { 0, 1, 2 };
             for (int j = 0; j < 3; j++)
             {
                 int oldGlobalIdx = i + j;

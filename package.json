@@ -7,7 +7,7 @@
     "email": "https://discord.gg/E5awVaqRdc",
     "url": "https://inspyrstudio.com"
   },
-  "version": "0.1.4-preview",
+  "version": "0.1.5-preview",
   "type": "Tool",
   "unity": "6000.0",
   "description": "Complete Cygon to Unity link / bridge allowing for hot reload and fast imports between both software. Keep in mind this is an early version and is subject to significant changes as we refine the workflow.",
