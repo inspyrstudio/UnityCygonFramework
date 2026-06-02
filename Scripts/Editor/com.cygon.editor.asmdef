@@ -1,11 +1,13 @@
 {
     "name": "com.cygon.editor",
-    "rootNamespace": "",
+    "rootNamespace": "InspyrStudio.CygonLink",
     "references": [
         "GUID:1cd0ff7c767a10b4b9cb31f08ca3ecd3",
         "com.cygon.misc"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

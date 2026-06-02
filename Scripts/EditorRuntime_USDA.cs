@@ -2,12 +2,15 @@
 
 using UnityEngine;
 
-public static class EditorRuntime_USDA
+namespace InspyrStudio.CygonLink
 {
-    public static string logPrefix = "Cygon Link";
-
-    public static void SendLog(string color,  string message)
+    public static class EditorRuntime_USDA
     {
-        Debug.Log($"<b>{logPrefix}</b>: <color={color}>{message}</color>");
+        public static string logPrefix = "Cygon Link";
+
+        public static void SendLog(string color,  string message)
+        {
+            Debug.Log($"<b>{logPrefix}</b>: <color={color}>{message}</color>");
+        }
     }
 }
