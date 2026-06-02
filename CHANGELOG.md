@@ -60,3 +60,14 @@ This currently works only for BaseMap, NormalMap and HeightMap
 
 - `EditorPostProcessor_USDA`, to `EditorProcessor_USDA` because it now handles default and custom importer based
 on infos found in the usda.
+
+## [0.1.5-preview]
+
+### Changed ###
+
+- All scripts are now declared within the `InspyrStudio.CygonLink` namespace.
+- Editor and Runtime assembly definitions are now constrained to the **Editor** platform, so editor-only code is no longer compiled into player builds.
+
+### Fixed ###
+
+- Imported meshes rendered inside-out (only back-faces visible). Triangle winding now respects the source `leftHanded` orientation, so faces display correctly.
