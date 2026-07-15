@@ -5,7 +5,7 @@
   "author": {
     "name": "Inspyr Studio",
     "email": "https://discord.gg/E5awVaqRdc",
-    "url": "https://inspyrstudio.com"
+    "url": "https://www.cygon.tech"
   },
   "version": "0.1.5-preview",
   "type": "Tool",
@@ -19,7 +19,7 @@
     "framework",
     "hot reload"
   ],
-  "documentationUrl": "https://inspyrstudio.com/",
+  "documentationUrl": "https://www.cygon.tech",
   "changelogUrl": "https://github.com/inspyrstudio/CygonLink/releases",
   "repository": {
     "url": "git@github.com:inspyrstudio/CygonLink.git",

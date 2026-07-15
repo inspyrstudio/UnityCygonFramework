@@ -1,0 +1,29 @@
+#usda 1.0 | Cygon
+(
+	defaultPrim = "World"
+	upAxis = "Y"
+	metersPerUnit = 1
+)
+
+def Xform "World"
+{
+	def Mesh "Floor_Object_7420ac1c_2314_4adc_98cb_2acbee28de32"
+	{
+		int[] faceVertexCounts = [3, 3, 3, 3]
+		int[] faceVertexIndices = [0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7]
+		uniform token orientation = "leftHanded"
+		normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0)](
+			
+			interpolation = "faceVarying"
+		)
+		
+		point3f[] points = [(2.5, 0, -2.5), (2.5, 0, 2.5), (-2.5, 0, 2.5), (-2.5, 0, -2.5), (-2.5, 0, -2.5), (-2.5, 0, 2.5), (2.5, 0, 2.5), (2.5, 0, -2.5)]
+		float2[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 0), (1, 1), (0, 1), (0, 0), (1, 0), (1, 1), (0, 0), (1, 1), (0, 1)](
+			
+			interpolation = "faceVarying"
+		)
+		
+		
+	}
+	
+}

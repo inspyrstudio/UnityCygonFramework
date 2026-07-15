@@ -77,6 +77,7 @@ on infos found in the usda.
 ### Added ###
 
 - Multi-material meshes: geometry partitioned with USD `GeomSubset` is now imported as one submesh per subset, each bound to its own material. Previously a multi-material object received only a single material.
+- Add Documentation
 
 ### Changed ###
 
