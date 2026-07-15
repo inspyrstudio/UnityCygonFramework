@@ -82,6 +82,7 @@ on infos found in the usda.
 
 - The shared `misc` assembly is now constrained to the **Editor** platform (editor and runtime assemblies already were), so no plugin code is compiled into player builds.
 - Removed the unused `Unity.VisualScripting` dependency (assembly references and `using`) and dead code in the importer (unused color/texture lookup caches and their helper).
+- Material textures (base color, normal, displacement) are now resolved from the USD material graph via the surface shader's `inputs:` connections instead of by filename convention`.
 
 ### Fixed ###
 

@@ -144,7 +144,6 @@ namespace InspyrStudio.CygonLink
         {
             string usdaFolder = Path.GetDirectoryName(usdaPath);
             string materialsFolder = Path.Combine(usdaFolder, "materials");
-            string texturesFolder = Path.Combine(usdaFolder, "textures");
             
             if (!Directory.Exists(materialsFolder)) Directory.CreateDirectory(materialsFolder);
             
@@ -167,7 +166,7 @@ namespace InspyrStudio.CygonLink
                 // Use "Tools > Cygon Link > Regenerate Materials" to force a rebuild.
                 if (AssetDatabase.LoadAssetAtPath<Material>(matPath) != null) continue;
                 
-                Material mat = BuildMaterial(block, matName, texturesFolder);
+                Material mat = BuildMaterial(block, matName, usdaFolder);
                 if (mat == null) continue;
                 
                 AssetDatabase.CreateAsset(mat, matPath);
@@ -185,7 +184,7 @@ namespace InspyrStudio.CygonLink
 
         /// <summary>Builds a Unity material from a single USD <c>def Material</c> block.</summary>
         /// <returns>The created material, or null if the pipeline's shader could not be found.</returns>
-        private static Material BuildMaterial(string block, string matName, string texturesFolder)
+        private static Material BuildMaterial(string block, string matName, string usdaFolder)
         {
             PipelineProfile profile = ResolvePipelineProfile();
             
@@ -198,7 +197,7 @@ namespace InspyrStudio.CygonLink
             
             Material mat = new Material(shader);
             ApplySurfaceInputs(mat, block, profile);
-            ApplyTextures(mat, block, matName, texturesFolder, profile);
+            ApplyTextures(mat, block, usdaFolder, profile);
             ApplyUvTransform(mat, block, matName, profile.BaseMap);
             return mat;
         }
@@ -268,20 +267,17 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>
-        /// Assigns the base / normal / height maps (filename convention <c>_complete/_normal/_height</c>)
-        /// and enables the matching shader keywords.
+        /// Follows the surface shader's texture connections (diffuse / normal / displacement) and
+        /// assigns each declared <c>UsdUVTexture</c> file, with its own wrap mode and color space.
         /// </summary>
-        private static void ApplyTextures(Material mat, string block, string matName, string texturesFolder, PipelineProfile p)
+        private static void ApplyTextures(Material mat, string block, string usdaFolder, PipelineProfile p)
         {
-            TextureWrapMode? wrap = ParseWrap(TryGetToken(block, "wrapS"));
-            bool? sRGB = ParseColorSpace(TryGetToken(block, "sourceColorSpace"));
+            AssignConnectedTexture(mat, block, "diffuseColor", p.BaseMap, usdaFolder, false);
+            bool hasNormal = AssignConnectedTexture(mat, block, "normal", p.Normal, usdaFolder, true);
+            bool hasHeight = AssignConnectedTexture(mat, block, "displacement", p.Height, usdaFolder, false);
             
-            TryAssignTexture(mat, p.BaseMap, Path.Combine(texturesFolder, matName + "_complete"), false, wrap, sRGB);
-            TryAssignTexture(mat, p.Normal, Path.Combine(texturesFolder, matName + "_normal"), true, wrap, null);
-            TryAssignTexture(mat, p.Height, Path.Combine(texturesFolder, matName + "_height"), false, wrap, false);
-            
-            if (mat.GetTexture(p.Normal)) mat.EnableKeyword("_NORMALMAP");
-            if (mat.GetTexture(p.Height)) mat.EnableKeyword("_PARALLAXMAP");
+            if (hasNormal) mat.EnableKeyword("_NORMALMAP");
+            if (hasHeight) mat.EnableKeyword("_PARALLAXMAP");
         }
 
         /// <summary>
@@ -290,12 +286,14 @@ namespace InspyrStudio.CygonLink
         /// </summary>
         private static void ApplyUvTransform(Material mat, string block, string matName, string baseMapProp)
         {
-            Vector2 scale = TryGetVector2(block, "scale") ?? Vector2.one;
-            Vector2 offset = TryGetVector2(block, "translation") ?? Vector2.zero;
+            string scope = GetShaderScopeById(block, "UsdTransform2d") ?? block;
+            
+            Vector2 scale = TryGetVector2(scope, "scale") ?? Vector2.one;
+            Vector2 offset = TryGetVector2(scope, "translation") ?? Vector2.zero;
             mat.SetTextureScale(baseMapProp, scale);
             mat.SetTextureOffset(baseMapProp, offset);
             
-            float? rotation = TryGetFloat(block, "rotation");
+            float? rotation = TryGetFloat(scope, "rotation");
             if (rotation.HasValue && Mathf.Abs(rotation.Value) > 0.0001f)
                 EditorRuntime_USDA.SendLog("orange", $"Material '{matName}': UV rotation ({rotation.Value}) is not applied (URP/Standard Lit has no built-in UV rotation).");
         }
@@ -390,25 +388,75 @@ namespace InspyrStudio.CygonLink
         #region TEXTURE IMPORT
 
         /// <summary>
-        /// Finds the texture file for <paramref name="basePath"/> (trying common extensions), applies
-        /// its import settings, and assigns it to <paramref name="propName"/> on the material.
+        /// Follows a surface input's <c>.connect</c> to its <c>UsdUVTexture</c> shader, resolves the
+        /// declared file (relative to the USDA folder), applies its import settings and assigns it.
         /// </summary>
-        private static void TryAssignTexture(Material mat, string propName, string basePath, bool isNormalMap, TextureWrapMode? wrapMode = null, bool? sRGB = null)
+        /// <returns>True if a texture was found and assigned.</returns>
+        private static bool AssignConnectedTexture(Material mat, string block, string surfaceInput, string propName, string usdaFolder, bool isNormalMap)
         {
-            string[] extensions = { ".png", ".jpg", ".tga", ".jpeg" };
-            foreach (var ext in extensions)
+            string shaderName = GetConnectedShaderName(block, surfaceInput);
+            if (shaderName == null) return false;
+            
+            string scope = GetShaderScope(block, shaderName);
+            if (scope == null) return false;
+            
+            Match fileM = Regex.Match(scope, @"asset inputs:file\s*=\s*@([^@]+)@");
+            if (!fileM.Success) return false;
+            
+            string fullPath = Path.Combine(usdaFolder, fileM.Groups[1].Value.Trim()).Replace('\\', '/');
+            if (!File.Exists(fullPath)) return false;
+            
+            TextureWrapMode? wrap = ParseWrap(TryGetToken(scope, "wrapS"));
+            bool? sRGB = isNormalMap ? (bool?)null : ParseColorSpace(TryGetToken(scope, "sourceColorSpace"));
+            
+            ConfigureTextureImport(fullPath, isNormalMap, wrap, sRGB);
+            
+            Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(fullPath);
+            if (tex == null) return false;
+            
+            mat.SetTexture(propName, tex);
+            return true;
+        }
+
+        /// <summary>
+        /// Extracts the shader name a surface input connects to
+        /// </summary>
+        private static string GetConnectedShaderName(string block, string surfaceInput)
+        {
+            Match m = Regex.Match(block, @"inputs:" + Regex.Escape(surfaceInput) + @"\.connect\s*=\s*<[^>]*/([^/>.]+)\.outputs");
+            return m.Success ? m.Groups[1].Value : null;
+        }
+
+        /// <summary>
+        /// Returns the text of the <c>def Shader "shaderName"</c> block within a material block.
+        /// </summary>
+        private static string GetShaderScope(string block, string shaderName)
+        {
+            string marker = "def Shader \"" + shaderName + "\"";
+            int start = block.IndexOf(marker, StringComparison.Ordinal);
+            if (start < 0) return null;
+            int next = block.IndexOf("def Shader", start + marker.Length, StringComparison.Ordinal);
+            return next < 0 ? block.Substring(start) : block.Substring(start, next - start);
+        }
+
+        /// <summary>
+        /// Returns the text of the first shader block whose <c>info:id</c> equals <paramref name="usdId"/>.
+        /// </summary>
+        private static string GetShaderScopeById(string block, string usdId)
+        {
+            string idMarker = "info:id = \"" + usdId + "\"";
+            int search = 0;
+            while (true)
             {
-                string fullPath = (basePath + ext).Replace('\\', '/');
-                if (!File.Exists(fullPath)) continue;
+                int start = block.IndexOf("def Shader", search, StringComparison.Ordinal);
+                if (start < 0) return null;
                 
-                ConfigureTextureImport(fullPath, isNormalMap, wrapMode, sRGB);
+                int next = block.IndexOf("def Shader", start + "def Shader".Length, StringComparison.Ordinal);
+                string scope = next < 0 ? block.Substring(start) : block.Substring(start, next - start);
+                if (scope.Contains(idMarker)) return scope;
                 
-                Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(fullPath);
-                if (tex != null)
-                {
-                    mat.SetTexture(propName, tex);
-                    return;
-                }
+                if (next < 0) return null;
+                search = next;
             }
         }
 
