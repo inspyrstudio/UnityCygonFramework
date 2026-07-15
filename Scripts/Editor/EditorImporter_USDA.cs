@@ -45,6 +45,7 @@ namespace InspyrStudio.CygonLink
         /// Entry point called by Unity. Ignores non-Cygon files, then dispatches to the single-mesh
         /// or scene importer depending on whether the file contains raw geometry.
         /// </summary>
+        /// <param name="ctx">The import context Unity provides for the asset being imported.</param>
         public override void OnImportAsset(AssetImportContext ctx)
         {
             // Only handle Cygon files; anything else falls back to Unity's default USD importer.
@@ -73,6 +74,9 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Imports a standalone mesh USDA as a single GameObject with a mesh + renderer.</summary>
+        /// <param name="ctx">The import context to attach the created objects to.</param>
+        /// <param name="text">Raw text of the mesh USDA.</param>
+        /// <param name="name">Name for the created GameObject.</param>
         private void ImportAsSingleMesh(AssetImportContext ctx, string text, string name)
         {
             Mesh mesh = BuildMeshFromUsda(text, out _);
@@ -88,6 +92,9 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Imports a scene USDA: builds the hierarchy, then binds generated materials.</summary>
+        /// <param name="ctx">The import context to attach created objects to.</param>
+        /// <param name="text">Raw text of the scene USDA.</param>
+        /// <param name="name">Name for the root container GameObject.</param>
         private void ImportAsScene(AssetImportContext ctx, string text, string name)
         {
             string[] lines = text.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
@@ -115,6 +122,9 @@ namespace InspyrStudio.CygonLink
         /// Walks the prim tree, spawning GameObjects, applying transforms and recording
         /// material bindings.
         /// </summary>
+        /// <param name="ctx">The import context (used to attach referenced meshes).</param>
+        /// <param name="lines">The scene USDA split into lines.</param>
+        /// <param name="name">Name for the root container GameObject (the asset file name).</param>
         /// <returns>The root container GameObject for the imported scene.</returns>
         private GameObject BuildSceneHierarchy(AssetImportContext ctx, string[] lines, string name)
         {
@@ -183,7 +193,10 @@ namespace InspyrStudio.CygonLink
             return rootContainer;
         }
 
-        /// <summary>False for Material/Shader prims, which must not become hierarchy GameObjects.</summary>
+        /// <summary>Decides whether a <c>def</c> prim should become a hierarchy GameObject.</summary>
+        /// <param name="objName">The prim's name.</param>
+        /// <param name="trimmed">The trimmed <c>def</c> line (checked for material/shader keywords).</param>
+        /// <returns>False for Material/Shader prims, true for regular hierarchy objects.</returns>
         private static bool IsHierarchyObject(string objName, string trimmed)
         {
             return !(objName == "Materials"
@@ -196,6 +209,9 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Creates a GameObject parented under the current top of the hierarchy stack.</summary>
+        /// <param name="objName">Name of the GameObject to create.</param>
+        /// <param name="parentStack">Hierarchy stack whose top becomes the new object's parent.</param>
+        /// <returns>The newly created child GameObject.</returns>
         private static GameObject CreateChild(string objName, Stack<GameObject> parentStack)
         {
             GameObject go = new GameObject(objName);
@@ -207,6 +223,8 @@ namespace InspyrStudio.CygonLink
         /// Resolves the subset targeted by an "over" line, matching it against the known GeomSubsets
         /// of the instance's mesh.
         /// </summary>
+        /// <param name="trimmed">The trimmed <c>over</c> line.</param>
+        /// <param name="instance">The mesh instance the <c>over</c> block applies to.</param>
         /// <returns>The subset name, or null (e.g. the mesh-name wrapper "over" around the subsets).</returns>
         private string ResolveSubsetName(string trimmed, GameObject instance)
         {
@@ -225,6 +243,9 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Applies one <c>xformOp</c> line (translate/scale/rotate) to the target transform.</summary>
+        /// <param name="target">The GameObject whose transform is set.</param>
+        /// <param name="trimmed">The trimmed property line to interpret.</param>
+        /// <param name="finalized">Set of already-applied transform keys, to avoid re-applying an op.</param>
         /// <returns>True when the line was a transform op and was applied.</returns>
         private bool ApplyTransformProperty(GameObject target, string trimmed, HashSet<int> finalized)
         {
@@ -257,6 +278,9 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Records a material binding, either per-subset or as the instance's single binding.</summary>
+        /// <param name="trimmed">The trimmed <c>rel material:binding</c> line.</param>
+        /// <param name="instance">The mesh instance the binding belongs to.</param>
+        /// <param name="subset">Subset name for a per-face binding, or null for the instance-wide binding.</param>
         private void CaptureMaterialBinding(string trimmed, GameObject instance, string subset)
         {
             int lastSlash = trimmed.LastIndexOf('/');
@@ -294,6 +318,7 @@ namespace InspyrStudio.CygonLink
         /// Builds the <c>sharedMaterials</c> array (one slot per submesh) for every mesh instance,
         /// matching each GeomSubset to the material bound to it.
         /// </summary>
+        /// <param name="ctx">The import context (used to load and depend on the .mat assets).</param>
         private void ApplyMaterialsToInstances(AssetImportContext ctx)
         {
             foreach (KeyValuePair<GameObject, string> kv in _instanceMeshPath)
@@ -342,6 +367,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Loads a generated material by name from the sibling "materials" folder.</summary>
+        /// <param name="matName">Material name without extension (a <c>.mat</c> under "materials/").</param>
+        /// <param name="ctx">The import context (registers a dependency on the loaded .mat).</param>
         /// <returns>The material, or null when the name is empty or the asset is missing.</returns>
         private Material LoadMaterial(string matName, AssetImportContext ctx)
         {
@@ -364,6 +391,9 @@ namespace InspyrStudio.CygonLink
         #region USD VALUE PARSING
 
         /// <summary>Parses a <c>(x, y, z)</c> tuple into a Vector3, optionally flipping Z for handedness.</summary>
+        /// <param name="line">The line containing a <c>(x, y, z)</c> tuple.</param>
+        /// <param name="flipZ">True to negate Z (USD → Unity handedness conversion).</param>
+        /// <returns>The parsed vector; zero (flipZ) or one otherwise when no tuple is found.</returns>
         private Vector3 ParseVector3FromLine(string line, bool flipZ)
         {
             Match m = Regex.Match(line, @"\(([^)]+)\)");
@@ -379,6 +409,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Parses a rotation <c>(x, y, z)</c> tuple, negating Y/Z to convert to Unity's convention.</summary>
+        /// <param name="line">The line containing a <c>(x, y, z)</c> rotation tuple.</param>
+        /// <returns>The Euler angles in Unity's convention, or zero when no tuple is found.</returns>
         private Vector3 ParseRotationFromLine(string line)
         {
             Match m = Regex.Match(line, @"\(([^)]+)\)");
@@ -397,6 +429,9 @@ namespace InspyrStudio.CygonLink
         /// Parses <c>def GeomSubset</c> blocks (elementType=face, familyName=materialBind), filling
         /// <paramref name="outNames"/> / <paramref name="outFaces"/> in declaration (== submesh) order.
         /// </summary>
+        /// <param name="lines">The mesh USDA split into lines.</param>
+        /// <param name="outNames">Receives each material-bind subset's name, in declaration order.</param>
+        /// <param name="outFaces">Receives each subset's face indices, parallel to <paramref name="outNames"/>.</param>
         private void ParseGeomSubsets(string[] lines, List<string> outNames, List<List<int>> outFaces)
         {
             string curName = null;
@@ -440,12 +475,16 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Parses a float with invariant culture.</summary>
+        /// <param name="s">The string to parse.</param>
+        /// <returns>The parsed float value.</returns>
         private static float ParseInv(string s)
         {
             return float.Parse(s, CultureInfo.InvariantCulture);
         }
 
         /// <summary>Appends every integer found on the value side of a <c>= [ ... ]</c> line.</summary>
+        /// <param name="trimmed">The line containing a <c>= [ ... ]</c> array of integers.</param>
+        /// <param name="target">The list the parsed integers are appended to.</param>
         private static void AppendInts(string trimmed, List<int> target)
         {
             string data = trimmed.Contains("=") ? trimmed.Split('=')[1] : trimmed;
@@ -476,6 +515,9 @@ namespace InspyrStudio.CygonLink
         /// Resolves a referenced mesh file (building + caching it on first use) and wires the mesh,
         /// renderer and collider onto the instance GameObject.
         /// </summary>
+        /// <param name="ctx">The import context (caches the built mesh as a sub-asset).</param>
+        /// <param name="target">The instance GameObject to attach the mesh/renderer/collider to.</param>
+        /// <param name="path">USDA-relative path to the referenced mesh file.</param>
         private void ApplyMeshReference(AssetImportContext ctx, GameObject target, string path)
         {
             string fullPath = Path.Combine(Path.GetDirectoryName(ctx.assetPath), path.Trim().Replace('/', Path.DirectorySeparatorChar));
@@ -511,6 +553,7 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Parses a mesh USDA into a welded Unity mesh with one submesh per GeomSubset.</summary>
+        /// <param name="rawText">Raw text of the mesh USDA.</param>
         /// <param name="subsetNames">Receives the GeomSubset names in submesh order (empty if none).</param>
         /// <returns>The built mesh.</returns>
         private Mesh BuildMeshFromUsda(string rawText, out List<string> subsetNames)
@@ -534,6 +577,8 @@ namespace InspyrStudio.CygonLink
         /// Reads points / faceVertexCounts / faceVertexIndices / st / normals into a <see cref="MeshData"/>.
         /// Points and normals get their Z flipped to convert from the USD to Unity handedness.
         /// </summary>
+        /// <param name="lines">The mesh USDA split into lines.</param>
+        /// <returns>A <see cref="MeshData"/> holding the parsed (Z-flipped) arrays.</returns>
         private static MeshData ParseMeshArrays(string[] lines)
         {
             MeshData data = new MeshData();
@@ -587,6 +632,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Expands the parsed arrays into per-corner (unwelded) vertices/uvs/normals/triangles.</summary>
+        /// <param name="mesh">The mesh to populate.</param>
+        /// <param name="data">The parsed per-corner arrays to expand.</param>
         private static void BuildUnweldedMesh(Mesh mesh, MeshData data)
         {
             int total = data.FaceIndices.Count;
@@ -610,6 +657,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Nudges strongly downward-facing normals slightly up so floors don't render pure black.</summary>
+        /// <param name="n">The normal to adjust.</param>
+        /// <returns>The normal, nudged upward when it faced strongly downward.</returns>
         private static Vector3 LiftDownwardNormal(Vector3 n)
         {
             n = n.normalized;
@@ -625,6 +674,9 @@ namespace InspyrStudio.CygonLink
         /// Welds duplicate vertices and, when GeomSubsets are provided, splits the triangles into one
         /// submesh per subset (Unity's mechanism for per-face materials).
         /// </summary>
+        /// <param name="mesh">The mesh to weld in place (its vertices/normals/uvs are rewritten).</param>
+        /// <param name="subsetFaces">Face-index lists per GeomSubset; null or empty produces a single submesh.</param>
+        /// <param name="faceVertexCounts">Vertex count per face, used to map faces to triangle ranges.</param>
         private void WeldVertices(Mesh mesh, List<List<int>> subsetFaces, List<int> faceVertexCounts)
         {
             Vector3[] verts = mesh.vertices;
@@ -728,6 +780,7 @@ namespace InspyrStudio.CygonLink
         /// Blends authored USDA normals toward Unity's flat face normals at corners/edges so cracks
         /// catch light, while leaving flat faces on their exact authored normal.
         /// </summary>
+        /// <param name="mesh">The mesh whose normals are refined in place.</param>
         private static void RefineNormals(Mesh mesh)
         {
             Vector3[] usdaNormals = mesh.normals;

@@ -33,14 +33,17 @@ namespace InspyrStudio.CygonLink
 
         #region FILE IDENTIFICATION
 
-        /// <summary>True when the file exists and its first line is the Cygon header.</summary>
+        /// <summary>Checks whether a file is a Cygon USDA file.</summary>
+        /// <param name="path">Path to the file to test.</param>
+        /// <returns>True when the file exists and its first line equals <see cref="Header"/>.</returns>
         public static bool IsCygonFile(string path)
         {
             if (string.IsNullOrEmpty(path) || !File.Exists(path)) return false;
             return File.ReadLines(path).FirstOrDefault() == Header;
         }
 
-        /// <summary>Every Cygon USDA file under the project's Assets folder (absolute paths).</summary>
+        /// <summary>Scans the project's Assets folder for Cygon USDA files.</summary>
+        /// <returns>The absolute paths of every Cygon USDA file found under Assets.</returns>
         public static List<string> FindAll()
         {
             List<string> result = new List<string>();
@@ -56,6 +59,8 @@ namespace InspyrStudio.CygonLink
         #region PATHS
 
         /// <summary>Converts an absolute path under Assets/ to a Unity project-relative asset path.</summary>
+        /// <param name="absolutePath">Absolute disk path, typically under the project's Assets folder.</param>
+        /// <returns>The "Assets/…"-relative path, or the input unchanged if it is not under Assets.</returns>
         public static string ToAssetPath(string absolutePath)
         {
             string p = absolutePath.Replace('\\', '/');

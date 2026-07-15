@@ -119,6 +119,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Updates every scene GameObject whose name matches the asset (or its "(Clone)" variant).</summary>
+        /// <param name="fileName">The asset file name (without extension) to match against object names.</param>
+        /// <param name="sourceAsset">The freshly imported asset whose children are copied onto each match.</param>
         private static void RefreshMatchingInstances(string fileName, GameObject sourceAsset)
         {
             GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
@@ -145,6 +147,8 @@ namespace InspyrStudio.CygonLink
         #region INSTANCE UPDATE
 
         /// <summary>Rebuilds an instance's children from the freshly imported source asset.</summary>
+        /// <param name="instance">The scene GameObject to refresh in place.</param>
+        /// <param name="sourceAsset">The imported asset to copy children from.</param>
         private static void UpdateInstance(GameObject instance, GameObject sourceAsset)
         {
             // Record for Undo system
@@ -183,12 +187,15 @@ namespace InspyrStudio.CygonLink
         #region CALLBACKS
 
         /// <summary>Refreshes everything when entering or exiting play mode.</summary>
+        /// <param name="state">The play-mode transition reported by the editor.</param>
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
             RefreshAll();
         }
 
         /// <summary>Watcher callback (fires on a background thread) — marshals the refresh onto the main thread.</summary>
+        /// <param name="sender">The <see cref="FileSystemWatcher"/> that raised the event.</param>
+        /// <param name="e">Event data containing the changed file's full path.</param>
         private static void OnUsdaFileChanged(object sender, FileSystemEventArgs e)
         {
             // FileSystemWatcher runs on a background thread.

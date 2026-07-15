@@ -46,6 +46,10 @@ namespace InspyrStudio.CygonLink
         /// Generates materials for every imported USDA, then reimports the ones whose materials were
         /// just created so the importer can bind the new .mat files (fixes the initial "pink" pass).
         /// </summary>
+        /// <param name="importedAssets">Asset paths that were (re)imported this pass; scanned for .usda files.</param>
+        /// <param name="deletedAssets">Asset paths deleted this pass (unused).</param>
+        /// <param name="movedAssets">New asset paths of moved assets (unused).</param>
+        /// <param name="movedFromAssetPaths">Previous asset paths of moved assets (unused).</param>
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
             List<string> usdasToReimport = new List<string>();
@@ -183,6 +187,9 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Builds a Unity material from a single USD <c>def Material</c> block.</summary>
+        /// <param name="block">The text of the material's <c>def Material</c> block.</param>
+        /// <param name="matName">The material name, used for asset naming and log messages.</param>
+        /// <param name="usdaFolder">Folder of the source USDA, used to resolve relative texture paths.</param>
         /// <returns>The created material, or null if the pipeline's shader could not be found.</returns>
         private static Material BuildMaterial(string block, string matName, string usdaFolder)
         {
@@ -203,6 +210,7 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Resolves the shader + property names for the active render pipeline (URP / HDRP / Built-in).</summary>
+        /// <returns>A <see cref="PipelineProfile"/> holding the shader name and property names to target.</returns>
         private static PipelineProfile ResolvePipelineProfile()
         {
             // Defaults: built-in Standard shader.
@@ -245,6 +253,9 @@ namespace InspyrStudio.CygonLink
         /// Applies the <c>UsdPreviewSurface</c> scalar/color inputs (diffuse, metallic, roughness,
         /// emissive) that are explicitly authored in the block.
         /// </summary>
+        /// <param name="mat">The material to write the inputs onto.</param>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="p">Pipeline property names for the active render pipeline.</param>
         private static void ApplySurfaceInputs(Material mat, string block, PipelineProfile p)
         {
             Color? diffuse = TryGetColor(block, "diffuseColor");
@@ -270,6 +281,10 @@ namespace InspyrStudio.CygonLink
         /// Follows the surface shader's texture connections (diffuse / normal / displacement) and
         /// assigns each declared <c>UsdUVTexture</c> file, with its own wrap mode and color space.
         /// </summary>
+        /// <param name="mat">The material to assign the textures to.</param>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="usdaFolder">Folder of the source USDA, used to resolve relative texture paths.</param>
+        /// <param name="p">Pipeline property names for the active render pipeline.</param>
         private static void ApplyTextures(Material mat, string block, string usdaFolder, PipelineProfile p)
         {
             AssignConnectedTexture(mat, block, "diffuseColor", p.BaseMap, usdaFolder, false);
@@ -284,6 +299,10 @@ namespace InspyrStudio.CygonLink
         /// Applies the <c>UsdTransform2d</c> UV tiling / offset / rotation to the base map. In URP Lit
         /// every map samples with <c>_BaseMap_ST</c>, so transforming the base map transforms them all.
         /// </summary>
+        /// <param name="mat">The material whose texture tiling/offset is set.</param>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="matName">The material name, used for the UV-rotation warning log.</param>
+        /// <param name="baseMapProp">The base-map shader property whose tiling/offset is set.</param>
         private static void ApplyUvTransform(Material mat, string block, string matName, string baseMapProp)
         {
             string scope = GetShaderScopeById(block, "UsdTransform2d") ?? block;
@@ -309,6 +328,8 @@ namespace InspyrStudio.CygonLink
         #region USD VALUE PARSING
 
         /// <summary>Reads <c>inputs:&lt;name&gt; = (r, g, b[, a])</c>; ignores ".connect" (textured) inputs.</summary>
+        /// <param name="block">The text to search.</param>
+        /// <param name="inputName">The USD input name without the "inputs:" prefix, e.g. "diffuseColor".</param>
         /// <returns>The color, or null when the input is absent or not an inline tuple.</returns>
         private static Color? TryGetColor(string block, string inputName)
         {
@@ -320,6 +341,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Reads <c>inputs:&lt;name&gt; = (x, y)</c>.</summary>
+        /// <param name="block">The text to search.</param>
+        /// <param name="inputName">The USD input name without the "inputs:" prefix, e.g. "scale".</param>
         /// <returns>The vector, or null when the input is absent.</returns>
         private static Vector2? TryGetVector2(string block, string inputName)
         {
@@ -331,6 +354,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Reads a single scalar <c>inputs:&lt;name&gt; = value</c> (not a tuple, not ".connect").</summary>
+        /// <param name="block">The text to search.</param>
+        /// <param name="inputName">The USD input name without the "inputs:" prefix, e.g. "metallic".</param>
         /// <returns>The value, or null when the input is absent.</returns>
         private static float? TryGetFloat(string block, string inputName)
         {
@@ -340,6 +365,8 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Reads <c>inputs:&lt;name&gt; = "value"</c>.</summary>
+        /// <param name="block">The text to search.</param>
+        /// <param name="inputName">The USD input name without the "inputs:" prefix, e.g. "wrapS".</param>
         /// <returns>The token text, or null when the input is absent.</returns>
         private static string TryGetToken(string block, string inputName)
         {
@@ -348,12 +375,16 @@ namespace InspyrStudio.CygonLink
         }
 
         /// <summary>Parses a float with invariant culture (trims surrounding whitespace).</summary>
+        /// <param name="s">The string to parse.</param>
+        /// <returns>The parsed float value.</returns>
         private static float ParseF(string s)
         {
             return float.Parse(s.Trim(), CultureInfo.InvariantCulture);
         }
 
-        /// <summary>Maps a USD wrap token to a Unity <see cref="TextureWrapMode"/> (null = leave importer default).</summary>
+        /// <summary>Maps a USD wrap token to a Unity <see cref="TextureWrapMode"/>.</summary>
+        /// <param name="usdWrap">The USD wrap token ("repeat", "mirror", "clamp", "black").</param>
+        /// <returns>The matching wrap mode, or null for an unknown/empty token (leave importer default).</returns>
         private static TextureWrapMode? ParseWrap(string usdWrap)
         {
             if (string.IsNullOrEmpty(usdWrap)) return null;
@@ -367,7 +398,9 @@ namespace InspyrStudio.CygonLink
             }
         }
 
-        /// <summary>Maps a USD sourceColorSpace token to an sRGB flag (null = leave importer default).</summary>
+        /// <summary>Maps a USD sourceColorSpace token to an sRGB flag.</summary>
+        /// <param name="usdColorSpace">The USD color-space token ("sRGB", "raw", "auto").</param>
+        /// <returns>True for sRGB, false for raw/linear, or null for unknown/empty (leave importer default).</returns>
         private static bool? ParseColorSpace(string usdColorSpace)
         {
             if (string.IsNullOrEmpty(usdColorSpace)) return null;
@@ -391,6 +424,12 @@ namespace InspyrStudio.CygonLink
         /// Follows a surface input's <c>.connect</c> to its <c>UsdUVTexture</c> shader, resolves the
         /// declared file (relative to the USDA folder), applies its import settings and assigns it.
         /// </summary>
+        /// <param name="mat">The material to assign the texture to.</param>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="surfaceInput">The surface-shader input to follow, e.g. "diffuseColor" or "normal".</param>
+        /// <param name="propName">The Unity texture property to assign, e.g. "_BaseMap".</param>
+        /// <param name="usdaFolder">Folder of the source USDA, used to resolve the relative file path.</param>
+        /// <param name="isNormalMap">True to import the texture as a normal map (and skip the sRGB flag).</param>
         /// <returns>True if a texture was found and assigned.</returns>
         private static bool AssignConnectedTexture(Material mat, string block, string surfaceInput, string propName, string usdaFolder, bool isNormalMap)
         {
@@ -418,18 +457,20 @@ namespace InspyrStudio.CygonLink
             return true;
         }
 
-        /// <summary>
-        /// Extracts the shader name a surface input connects to
-        /// </summary>
+        /// <summary>Extracts the shader name a surface input connects to (e.g. <c>inputs:normal.connect</c> -&gt; "normalTexture").</summary>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="surfaceInput">The surface-shader input whose connection to follow, e.g. "normal".</param>
+        /// <returns>The connected shader's name, or null if the input has no connection.</returns>
         private static string GetConnectedShaderName(string block, string surfaceInput)
         {
             Match m = Regex.Match(block, @"inputs:" + Regex.Escape(surfaceInput) + @"\.connect\s*=\s*<[^>]*/([^/>.]+)\.outputs");
             return m.Success ? m.Groups[1].Value : null;
         }
 
-        /// <summary>
-        /// Returns the text of the <c>def Shader "shaderName"</c> block within a material block.
-        /// </summary>
+        /// <summary>Returns the text of the <c>def Shader "shaderName"</c> block within a material block.</summary>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="shaderName">The name of the shader prim to extract.</param>
+        /// <returns>The shader block's text, or null if no shader with that name exists.</returns>
         private static string GetShaderScope(string block, string shaderName)
         {
             string marker = "def Shader \"" + shaderName + "\"";
@@ -439,9 +480,10 @@ namespace InspyrStudio.CygonLink
             return next < 0 ? block.Substring(start) : block.Substring(start, next - start);
         }
 
-        /// <summary>
-        /// Returns the text of the first shader block whose <c>info:id</c> equals <paramref name="usdId"/>.
-        /// </summary>
+        /// <summary>Returns the text of the first shader block whose <c>info:id</c> equals <paramref name="usdId"/>.</summary>
+        /// <param name="block">The material's <c>def Material</c> block text.</param>
+        /// <param name="usdId">The USD shader id to match, e.g. "UsdTransform2d".</param>
+        /// <returns>The matching shader block's text, or null if none matches.</returns>
         private static string GetShaderScopeById(string block, string usdId)
         {
             string idMarker = "info:id = \"" + usdId + "\"";
@@ -464,6 +506,10 @@ namespace InspyrStudio.CygonLink
         /// Applies the import settings implied by the USD material (normal-map type, wrap mode, color
         /// space) and reimports the texture only when something actually changed.
         /// </summary>
+        /// <param name="assetPath">Asset path of the texture to configure.</param>
+        /// <param name="isNormalMap">True to set the importer's texture type to NormalMap.</param>
+        /// <param name="wrapMode">Wrap mode to apply, or null to leave it unchanged.</param>
+        /// <param name="sRGB">sRGB flag to apply (color textures only), or null to leave it unchanged.</param>
         private static void ConfigureTextureImport(string assetPath, bool isNormalMap, TextureWrapMode? wrapMode, bool? sRGB)
         {
             TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
