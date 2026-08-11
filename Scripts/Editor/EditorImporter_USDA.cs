@@ -132,7 +132,7 @@ namespace InspyrStudio.CygonLink
             Stack<GameObject> parentStack = new Stack<GameObject>();
             parentStack.Push(rootContainer);
             
-            HashSet<int> finalizedTransforms = new HashSet<int>();
+            HashSet<(int, TransformOp)> finalizedTransforms = new HashSet<(int, TransformOp)>();
             GameObject activeTarget = null;
             
             // Material-binding context, tracked independently of the hierarchy stack because
@@ -161,10 +161,11 @@ namespace InspyrStudio.CygonLink
                 if (trimmed.StartsWith("over "))
                 {
                     currentSubset = ResolveSubsetName(trimmed, lastMeshInstance);
+                    activeTarget = null;
                     continue;
                 }
                 
-                if (trimmed.Contains("{")) { if (activeTarget != null) parentStack.Push(activeTarget); continue; }
+                if (trimmed.Contains("{")) { parentStack.Push(activeTarget != null ? activeTarget : parentStack.Peek()); continue; }
                 if (trimmed.Contains("}")) { if (parentStack.Count > 1) parentStack.Pop(); activeTarget = null; currentSubset = null; continue; }
                 
                 if (trimmed.Contains("rel material:binding"))
@@ -242,35 +243,37 @@ namespace InspyrStudio.CygonLink
             return null;
         }
 
+        /// <summary>The xform operations tracked per object, so only the first declaration wins.</summary>
+        private enum TransformOp { Translate, Scale, Rotate }
+
         /// <summary>Applies one <c>xformOp</c> line (translate/scale/rotate) to the target transform.</summary>
         /// <param name="target">The GameObject whose transform is set.</param>
         /// <param name="trimmed">The trimmed property line to interpret.</param>
-        /// <param name="finalized">Set of already-applied transform keys, to avoid re-applying an op.</param>
+        /// <param name="finalized">(object, op) pairs already applied, so a later line cannot overwrite them.</param>
         /// <returns>True when the line was a transform op and was applied.</returns>
-        private bool ApplyTransformProperty(GameObject target, string trimmed, HashSet<int> finalized)
+        private bool ApplyTransformProperty(GameObject target, string trimmed, HashSet<(int, TransformOp)> finalized)
         {
+            if (trimmed.Contains("xformOpOrder")) return false;
+            
             int objID = target.GetInstanceID();
             
-            if (trimmed.Contains("xformOp:translate") && !finalized.Contains(objID + 1))
+            if (trimmed.Contains("xformOp:translate") && finalized.Add((objID, TransformOp.Translate)))
             {
                 target.transform.localPosition = ParseVector3FromLine(trimmed, true);
-                finalized.Add(objID + 1);
                 return true;
             }
             
-            if (trimmed.Contains("xformOp:scale") && !finalized.Contains(objID + 2))
+            if (trimmed.Contains("xformOp:scale") && finalized.Add((objID, TransformOp.Scale)))
             {
                 Vector3 sc = ParseVector3FromLine(trimmed, false);
                 if (target.transform.parent != null && target.transform.parent.name == "World") sc = Vector3.one;
                 target.transform.localScale = sc;
-                finalized.Add(objID + 2);
                 return true;
             }
             
-            if (trimmed.Contains("xformOp:rotateZYX") && !finalized.Contains(objID + 3))
+            if (trimmed.Contains("xformOp:rotateZYX") && finalized.Add((objID, TransformOp.Rotate)))
             {
                 target.transform.localEulerAngles = ParseRotationFromLine(trimmed);
-                finalized.Add(objID + 3);
                 return true;
             }
             

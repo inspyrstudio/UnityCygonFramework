@@ -72,7 +72,7 @@ on infos found in the usda.
 
 - Imported meshes rendered inside-out (only back-faces visible). Triangle winding now respects the source `leftHanded` orientation, so faces display correctly.
 
-## [0.1.6-preview]
+## [0.1.6]
 
 ### Added ###
 
@@ -88,3 +88,9 @@ on infos found in the usda.
 ### Fixed ###
 
 - A stray `World.mat` was generated from the scene's non-material content; only real `def Material` blocks are processed now.
+
+## [0.1.7]
+
+### Fixed ###
+- Objects were placed at the wrong world position, most visibly losing the height of the floor they belong to (Y snapping to 0), and sometimes X/Z as well. The hierarchy stack pushed a frame only when a block introduced a GameObject but popped on every closing brace, so each `over` block (used for per-face material bindings) leaked one level. The stack drifted upward and later prims were parented to an ancestor, losing their parent's offset. Every block now pushes exactly one frame, so pushes and pops always balance.
+- Transform operations are now tracked per (object, operation) pair instead of `instanceID + 1/2/3` keys in a shared set, where objects with nearby instance IDs could collide and have an `xformOp` silently skipped. The `xformOpOrder` declaration line is also ignored explicitly rather than being parsed as a value.
