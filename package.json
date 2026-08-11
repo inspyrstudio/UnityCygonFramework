@@ -5,9 +5,9 @@
   "author": {
     "name": "Inspyr Studio",
     "email": "https://discord.gg/E5awVaqRdc",
-    "url": "https://inspyrstudio.com"
+    "url": "https://www.cygon.tech"
   },
-  "version": "0.1.5-preview",
+  "version": "0.1.6",
   "type": "Tool",
   "unity": "6000.0",
   "description": "Complete Cygon to Unity link / bridge allowing for hot reload and fast imports between both software. Keep in mind this is an early version and is subject to significant changes as we refine the workflow.",
@@ -19,7 +19,7 @@
     "framework",
     "hot reload"
   ],
-  "documentationUrl": "https://inspyrstudio.com/",
+  "documentationUrl": "https://github.com/inspyrstudio/CygonLink/blob/main/README.md",
   "changelogUrl": "https://github.com/inspyrstudio/CygonLink/releases",
   "repository": {
     "url": "git@github.com:inspyrstudio/CygonLink.git",

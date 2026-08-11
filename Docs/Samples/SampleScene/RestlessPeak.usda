@@ -1,0 +1,2535 @@
+#usda 1.0 | Cygon
+(
+	defaultPrim = "World"
+	upAxis = "Y"
+	metersPerUnit = 1
+)
+
+def Xform "World"
+{
+	def Xform "RestlessPeak"
+	{
+		float3 xformOp:rotateZYX = (0, 0, 0)
+		float3 xformOp:scale = (1, 1, 1)
+		double3 xformOp:translate = (0, 0, 0)
+		uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+		
+		def Xform "Floor__2_50m_2217e162_389b_4694_9668_418ba6135292"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_0_00m_087d371e_9205_4d73_91a6_c47617b588dc"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, -4.768372E-07, 0)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_f1ca35c1_09f7_4904_b424_6374090b6d41"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_f1ca35c1_09f7_4904_b424_6374090b6d41.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5, 0.0999999, 2)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_53e274fe_1d17_4c67_a718_ab4845352c07"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_53e274fe_1d17_4c67_a718_ab4845352c07.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (10, 0.0999999, 2)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_bd5ac6eb_ac05_450e_a40f_2474c0ebea7d"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_bd5ac6eb_ac05_450e_a40f_2474c0ebea7d.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (10, 0.0999999, -20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_9f968dba_b904_41bb_8199_f1c2343804b0"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_9f968dba_b904_41bb_8199_f1c2343804b0.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, -25)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_68247171_8318_416d_8759_f49bb9b73c89"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_68247171_8318_416d_8759_f49bb9b73c89.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-5, 0.0999999, -20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_f635281d_6676_4703_adb6_7bc400093008"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_f635281d_6676_4703_adb6_7bc400093008.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, -15)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_af5f6ce0_75d8_45cc_9b63_8afe4e07d959"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_af5f6ce0_75d8_45cc_9b63_8afe4e07d959.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-8.25, 0.0999999, -25)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_41faa8f4_3529_4eee_aa81_9d1550eaa8a6"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_41faa8f4_3529_4eee_aa81_9d1550eaa8a6.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-11.5, 0.0999999, -20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_6396d272_57f8_4975_873d_292771e7dd67"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_6396d272_57f8_4975_873d_292771e7dd67.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-8.25, 0.0999999, -15)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_9a0e8a50_ccc5_493b_895b_6a043055b6e9"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_9a0e8a50_ccc5_493b_895b_6a043055b6e9.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-10, 0.0999999, -9)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_42c6bee6_f01e_42ca_bf2a_1e919e48623b"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_42c6bee6_f01e_42ca_bf2a_1e919e48623b.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-6, 0.0999999, -9)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_69ef1941_1565_4ca8_b504_9fa95865a6bd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_69ef1941_1565_4ca8_b504_9fa95865a6bd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.5, 0.0999999, 11.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_93556cd3_b504_4761_98ce_f91371883676"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_93556cd3_b504_4761_98ce_f91371883676.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, 11.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_dee0a85a_4a20_4180_85d7_7c6628b33e32"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_dee0a85a_4a20_4180_85d7_7c6628b33e32.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, -8.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_eb7befdf_aa94_4c9f_9661_460fa298fd77"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_eb7befdf_aa94_4c9f_9661_460fa298fd77.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.5, 0.0999999, -8.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_79c2adaf_091e_4d60_a80e_eae3dfedf9d3"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_79c2adaf_091e_4d60_a80e_eae3dfedf9d3.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, 25)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_105912b1_5c9c_4b4b_98a5_abf6f9ac5b41"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_105912b1_5c9c_4b4b_98a5_abf6f9ac5b41.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, 20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_dfe3c738_7206_4b6d_894a_aaf420f07125"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_dfe3c738_7206_4b6d_894a_aaf420f07125.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.0999999, -6)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_c20fa4bf_26f5_46d6_9756_12f07c94e640"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_c20fa4bf_26f5_46d6_9756_12f07c94e640.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.0999999, 9)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_b006573b_a413_4b15_9248_efc83580233b"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_b006573b_a413_4b15_9248_efc83580233b.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.0999999, -20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_ca95c5dd_dfb1_47c1_a6a6_4535614fcd01"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_ca95c5dd_dfb1_47c1_a6a6_4535614fcd01.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-8.25, 0.0999999, -20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_37fdf42a_f796_44e3_9991_a2ecc582f74d"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_37fdf42a_f796_44e3_9991_a2ecc582f74d.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.0999999, 11.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_7420ac1c_2314_4adc_98cb_2acbee28de32"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_7420ac1c_2314_4adc_98cb_2acbee28de32.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.0999999, -8.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_a9ce736a_fd2d_49a7_945a_ca2662a826fb"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_a9ce736a_fd2d_49a7_945a_ca2662a826fb.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.0999999, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Stair_9548cb0f_40a9_4194_8e69_eff53ade5183"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_9548cb0f_40a9_4194_8e69_eff53ade5183.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 1.85, 20)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_4813ca05_cde5_4ebc_acd9_55b33e95ae6f"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_4813ca05_cde5_4ebc_acd9_55b33e95ae6f.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-10.075, 3.9, -9)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_0cd44c5a_1fb1_40f3_a481_8d5b73f19596"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_0cd44c5a_1fb1_40f3_a481_8d5b73f19596.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.5999999, -8.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_95279697_89fc_484b_baf9_10e67502f21c"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_95279697_89fc_484b_baf9_10e67502f21c.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 0.5999999, 11.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_0_10m_657507ec_7f52_449b_b571_9ca01c0b3998"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (-10.5, 0.1999992, 14.5)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_f687f603_b3a9_4a57_b161_864766beea3e"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_f687f603_b3a9_4a57_b161_864766beea3e.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.5, 2.160668E-07, -0.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_6afab6eb_c7dd_4984_9b53_657d32bdec85"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_6afab6eb_c7dd_4984_9b53_657d32bdec85.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 2.160668E-07, -0.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_8a71f753_e4ea_40ff_aadc_19afc6422cb6"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_8a71f753_e4ea_40ff_aadc_19afc6422cb6.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (1.5, 2.160668E-07, -1.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_4e224718_3296_4fe0_826e_5a017906c9d4"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_4e224718_3296_4fe0_826e_5a017906c9d4.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 2.160668E-07, -9.536743E-07)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_a98623b5_447d_44da_ac3d_59b9dcdc9684"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_a98623b5_447d_44da_ac3d_59b9dcdc9684.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 2.160668E-07, 2.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_ec4af7b7_3e69_4859_851a_8912a5cdf13b"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_ec4af7b7_3e69_4859_851a_8912a5cdf13b.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.5, 2.160668E-07, -9.536743E-07)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_cb18b4d4_08d0_4441_a82f_a709571cbd74"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_cb18b4d4_08d0_4441_a82f_a709571cbd74.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 2.160668E-07, -2.500002)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_54df13a4_66b5_44f4_b625_c677353365c6"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_54df13a4_66b5_44f4_b625_c677353365c6.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (1.5, 2.160668E-07, 0.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_bed1b3a0_da40_4f45_9b1a_108fc37a46cd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_bed1b3a0_da40_4f45_9b1a_108fc37a46cd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 2.160668E-07, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_0_40m_2d9588ce_5e48_451a_90c0_ab8e4f4e9663"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_0_50m_6fb2acef_1b64_4c81_95af_ed8f5394286f"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_0_60m_8e916be6_1069_45bd_a6d8_bb81411f9dba"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_0_70m_32243de2_bed0_4d8d_a9a1_d69519b93cfe"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, 0.7999995, 1.5)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Floor_Object_00044bf4_2a2f_4f9c_ae7d_b7ddcc6d1ca2"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_00044bf4_2a2f_4f9c_ae7d_b7ddcc6d1ca2.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, -5.960464E-08, 6.25)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_ab7fb2a3_e005_4a0c_bebe_ec2dc7c77d52"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_ab7fb2a3_e005_4a0c_bebe_ec2dc7c77d52.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, -5.960464E-08, -6.25)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_0_80m_affb18a3_c389_45d2_84f6_4883faab98ae"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_0_90m_2848dc81_cf43_422b_b1ca_b77dd739a143"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_00m_97d546cb_bbb5_4620_b169_fb5e4a4dc802"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (-2.574999, 1.099999, 5.15)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_73c7479d_eaeb_413a_9721_80b90bcb0fcc"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_73c7479d_eaeb_413a_9721_80b90bcb0fcc.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.074999, -5.960464E-08, 0.8500004)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_8d394ca0_4cad_452d_ae23_6db8c143807a"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_8d394ca0_4cad_452d_ae23_6db8c143807a.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.07499886, -5.960464E-08, 0.8500004)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_d5965345_89e6_446d_b358_64256a9ccfff"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_d5965345_89e6_446d_b358_64256a9ccfff.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.07499886, -5.960464E-08, -8.15)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_c020e2bc_2ad3_4f77_9ccf_71569f88ad73"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_c020e2bc_2ad3_4f77_9ccf_71569f88ad73.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.074999, -5.960464E-08, -8.15)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_c43463e3_2a0e_4ffd_8a9a_bd6b4c57ccb3"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_c43463e3_2a0e_4ffd_8a9a_bd6b4c57ccb3.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.574999, -5.960464E-08, -4.65)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_1537106f_53be_42d7_9d95_056b4b7b462c"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_1537106f_53be_42d7_9d95_056b4b7b462c.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.574999, -5.960464E-08, -2.65)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_7f2d43f2_d835_4a51_ad7f_45a3291d82d0"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_7f2d43f2_d835_4a51_ad7f_45a3291d82d0.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.574999, -5.960464E-08, -0.6499996)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_3497ef0d_833a_4663_99b4_9025bb481d91"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_3497ef0d_833a_4663_99b4_9025bb481d91.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.574999, -5.960464E-08, -6.65)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Stair_5b3ebe7a_9211_465e_b13c_564acca019f5"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_5b3ebe7a_9211_465e_b13c_564acca019f5.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-7.425001, 3.75, -14.075)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_c3bd7bc6_477c_4d45_9a9d_719642f05830"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_c3bd7bc6_477c_4d45_9a9d_719642f05830.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-3.425001, 3.75, -14.075)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_28356364_45bd_42f2_82f9_74a5527dedcc"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_28356364_45bd_42f2_82f9_74a5527dedcc.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.074999, 0.5, -0.6499996)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_06808d52_057d_4f15_8dc3_ce43341cc2cd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_06808d52_057d_4f15_8dc3_ce43341cc2cd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.074999, 0.5, -6.65)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_1345f9b6_7c0e_4155_b261_3ad6dc462307"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_1345f9b6_7c0e_4155_b261_3ad6dc462307.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.2249985, 0.5, 6.6)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_b8d26fad_39e9_4998_acb1_46246ddfea0f"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_b8d26fad_39e9_4998_acb1_46246ddfea0f.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.224998, 0.5, 6.6)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_9166386e_ce30_473c_8156_6a1727a76ed5"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_9166386e_ce30_473c_8156_6a1727a76ed5.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.224998, 0.5, -13.9)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_941e7fc1_751c_4374_ba1b_2f40c9652174"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_941e7fc1_751c_4374_ba1b_2f40c9652174.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.2249985, 0.5, -13.9)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_a09a9ac8_c0fa_4084_b156_56c34cb751bb"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_a09a9ac8_c0fa_4084_b156_56c34cb751bb.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.074999, 1.75, 19.7)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_95d8dcbb_e5e5_4390_b314_a183427e6ca7"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_95d8dcbb_e5e5_4390_b314_a183427e6ca7.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (4.999998, 1.75, 14.85)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_1_10m_692e2796_40dc_424e_a08a_14bab8a7e01b"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_20m_20858ebe_5a9f_4ff8_a725_0a8f681316b6"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_30m_722c92b8_2ed6_4344_8790_08656af59db7"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_40m_93526d46_3c37_4bfb_8829_66ed712004ca"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_50m_154b417f_f9a8_4cd9_8699_e6cf9a774989"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_60m_cbf021ed_e4c1_4299_bdf1_50409087aa9f"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_70m_b8ab1252_f250_4fba_92f2_5faee5f433a1"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, 1.799999, 1.5)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Floor_Object_8a6ec924_8742_4a47_8b29_0a35f327f3b8"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_8a6ec924_8742_4a47_8b29_0a35f327f3b8.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_1_80m_32ba289f_5837_4b54_bc24_487a69ee2313"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_1_90m_ce490e38_b0f6_44de_9888_48ee50a9857c"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_00m_a62b8219_81ea_4269_8072_fa6c93f2df9d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, 2.099999, 1.5)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_dc0d7b06_5dcf_4930_b548_5225aa41883e"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_dc0d7b06_5dcf_4930_b548_5225aa41883e.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.5, 2.384186E-07, 0.02692306)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_35560719_d8a8_4023_a329_5e983efbfb7f"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_35560719_d8a8_4023_a329_5e983efbfb7f.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.5, 2.384186E-07, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Stair_8ea10944_bbc8_426b_a425_9247f38bbd25"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_8ea10944_bbc8_426b_a425_9247f38bbd25.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.35, 0.5000002, 4.876923)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_accb3085_add1_4ff0_af04_fa6b33e8ada1"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_accb3085_add1_4ff0_af04_fa6b33e8ada1.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.65, 0.5000002, 4.876923)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_f7c67a1e_a303_4600_bfb5_090439551a68"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_f7c67a1e_a303_4600_bfb5_090439551a68.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.65, 0.5000002, -4.876923)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_e828d498_7485_41e6_8605_2a7000d8889d"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_e828d498_7485_41e6_8605_2a7000d8889d.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.35, 0.5000002, -4.85)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_2_10m_0856362b_6103_4d6c_aa79_3e6f8a8dc5b1"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_20m_52011bc6_7c01_4bc0_bf4a_f49c0397834e"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_30m_86aa2922_776d_4c3d_8d28_b625213b1efb"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_40m_d06ee112_bcb4_4ac1_b678_7d5f54dcf71d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_50m_01d61b5a_5da9_45b2_a7b2_cb7f7866141d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_60m_c96eede6_5ba7_4f4c_9ea8_49266c19661e"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_70m_fbcb23a1_cbea_4db8_bfac_7784dfd5f61d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_80m_73454c48_5677_486d_b946_2ff94e2e7367"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_2_90m_95ea15a2_4be5_4276_89d0_d599d3df4899"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_00m_cad89e19_9755_4707_b881_6445034549d7"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_10m_fece5258_ec94_4ecc_ae3e_fa2bc4ccd2c6"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (-9, 3.1, 14)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Floor_Object_ae1dc774_4e34_4582_b614_230ec0ab3918"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_ae1dc774_4e34_4582_b614_230ec0ab3918.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.0999999, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_3_20m_13ec68cb_f9a5_43e0_9034_aca1ca874bdd"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_30m_9f6ffa01_6c0e_468c_a724_d4014f6b910a"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_40m_7797a118_f7e5_4475_bf60_60a3c891cdd2"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_50m_19c22006_5b73_4852_b76d_6cdd45ecf15e"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (7.500011, 0.09999943, 20.075)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_166697d3_8193_4cd8_b30e_cd724d48534d"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_166697d3_8193_4cd8_b30e_cd724d48534d.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.500011, 3.5, -2.575001)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_6fa5e0c4_eec7_4840_b3cc_adc4ca7005fb"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_6fa5e0c4_eec7_4840_b3cc_adc4ca7005fb.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-1.144409E-05, 3.5, 4.924999)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_2fa6c470_948a_4b38_a5c4_063989d88dc4"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_2fa6c470_948a_4b38_a5c4_063989d88dc4.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.499989, 3.5, 2.424999)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_78c64a17_e661_4a63_869b_1be36af53506"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_78c64a17_e661_4a63_869b_1be36af53506.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.499989, 3.5, -2.575001)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_34bff72d_9e36_4358_88b1_23089d5ac8fd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_34bff72d_9e36_4358_88b1_23089d5ac8fd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-1.144409E-05, 3.5, 2.424999)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_b85062bb_e989_44ac_8049_7848fc2b6ee3"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_b85062bb_e989_44ac_8049_7848fc2b6ee3.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-1.144409E-05, 3.5, -2.575001)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Stair_9bd4dde4_904b_4fdb_9a80_e90a2b6be7cb"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_9bd4dde4_904b_4fdb_9a80_e90a2b6be7cb.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.500011, 5.5, -2.575001)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_3_60m_203c7197_5c85_4ac2_9646_2ecb4f63ce25"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_70m_ff4a8582_b7c0_4213_8caf_de533f0de83c"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_80m_ff75fb75_f92a_4e4d_a943_0a9dd91946df"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_3_90m_029f32c8_f7d5_44c9_beb2_3188d19c027b"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_00m_a1791b6d_92af_459b_b901_c9317c69775a"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_10m_1296cb2b_5c49_40ba_8d25_01cd087e7b9d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_20m_5b262d47_e4ad_4887_8566_46fb0a17fb82"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_40m_f75b71e3_26df_485c_b9d6_5bbbc29f0f68"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_50m_50526dce_aff6_47d7_8154_2bfb9fe5a473"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (7.474998, 4.599999, 17.4985)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Stair_b1b1edb4_73d9_4305_acae_988890f56ad0"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_b1b1edb4_73d9_4305_acae_988890f56ad0.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2.649998, 2, 0.00150013)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			def "Stair_ce9bd57a_b191_42f6_a3eb_a0bc687541a5"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Stair_ce9bd57a_b191_42f6_a3eb_a0bc687541a5.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2.375002, 2, 0.00150013)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Stair_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_4_60m_2283d3f0_c36a_40c8_ac99_aab2b0e7ea6d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_70m_c80e0c54_50e3_4356_b3a8_6bacd3e4c2b9"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_80m_76589834_5e6b_41f8_ba8b_82d8e313495f"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_4_90m_eda7c0da_6364_4bd1_a077_213e23b281a3"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_00m_d592733c_bef6_42d0_a209_66eac6630e00"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_10m_a69ff4c9_ebdf_4592_ab25_c9d60df7fced"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_20m_d5c03ab1_593c_41dc_a95c_f8732d760804"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_30m_d6ef260f_9494_4027_8040_7de3ad3dd398"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_40m_a956e91b_7efc_42e0_984c_5188fbefff28"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_50m_fa2e2dfc_18b3_45da_930c_45a9321f0aba"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_60m_9f78b4fd_c05e_4bdc_abb6_133f6041f706"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_70m_20c399cc_598c_45b1_8536_e0fd124693ba"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_80m_ac353383_7aa1_4351_835a_244e9d6bcb61"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_5_90m_ce549a41_ca13_4602_ba22_6c7b95268a90"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_00m_077cc26e_4bbd_40d8_86f5_001423beb9dc"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_10m_81a5bdad_16ef_46e1_a28b_40bfe11af3bb"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_20m_72c05894_9dd8_4000_a717_b485514d8024"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_40m_e47f914f_f601_45cc_bd39_1caace5b4537"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_50m_35cefe3b_cda2_45d4_ac1e_cc4e652e51bd"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_60m_3ad3f2c4_b2d7_47b5_9a8c_5e08871b1949"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_6_80m_4d970267_976b_47b8_91f9_7fbf1ce33533"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_7_00m_b9ddd508_9d85_437d_9932_32fd6c48ef57"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_7_10m_821f393c_8965_4009_998f_0e2a5e76f973"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_7_40m_036598e6_fab7_494f_93ba_805fb7eb510d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_7_50m_1d2e3402_55f4_47a1_87fa_e9676034945f"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (-0.7500134, 7.499999, -5.075012)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_87ac7817_51ce_4048_9b88_343c4a3b87cd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_87ac7817_51ce_4048_9b88_343c4a3b87cd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.750013, 0.1000004, 5.075012)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_997aacfc_6da0_4f86_9ba0_3ddea996ac22"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_997aacfc_6da0_4f86_9ba0_3ddea996ac22.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (10.75001, 0.1000004, 5.075012)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_68e6d9ec_ed36_49b5_ba93_8cdbbb3ad605"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_68e6d9ec_ed36_49b5_ba93_8cdbbb3ad605.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (10.75001, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_1f360848_7ce7_413d_9445_69814e49506c"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_1f360848_7ce7_413d_9445_69814e49506c.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (8.250013, 0.1000004, -19.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_855c1783_c91c_4e94_9c62_ac94862d94ee"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_855c1783_c91c_4e94_9c62_ac94862d94ee.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.7500134, 0.1000004, -19.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_52ca2891_381a_4b3b_a9f9_499cb5b24b7b"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_52ca2891_381a_4b3b_a9f9_499cb5b24b7b.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-4.249987, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_c010e6e5_17ad_434a_bef1_bee57a4bfc54"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_c010e6e5_17ad_434a_bef1_bee57a4bfc54.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.7500134, 0.1000004, -9.924988)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_27381809_7db6_4ef6_a35e_f123c9b8afb1"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_27381809_7db6_4ef6_a35e_f123c9b8afb1.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5.750013, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_ed28f66f_2507_4caf_82f1_489847fa39f8"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_ed28f66f_2507_4caf_82f1_489847fa39f8.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-7.499987, 0.1000004, -19.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_7a72f0ac_8ef7_4b69_a3cb_56360c6787c9"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_7a72f0ac_8ef7_4b69_a3cb_56360c6787c9.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-10.74999, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_1616d352_b5ae_47ce_bc06_d86839b291d7"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_1616d352_b5ae_47ce_bc06_d86839b291d7.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-9.999987, 0.1000004, -9.924988)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_2eecc143_03db_4322_872d_2f6c06e8f697"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_2eecc143_03db_4322_872d_2f6c06e8f697.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-4.749987, 0.1000004, -9.924988)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_b860f73f_55a0_463a_bdf5_e6e6c4e285fd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_b860f73f_55a0_463a_bdf5_e6e6c4e285fd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (8.250013, 0.1000004, 5.075012)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_f79c1b4b_8763_4551_a8b6_94a4693d3c97"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_f79c1b4b_8763_4551_a8b6_94a4693d3c97.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (8.250013, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_7a8bc24f_b59a_444f_9501_5cd1722caa60"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_7a8bc24f_b59a_444f_9501_5cd1722caa60.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.7500134, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_098b74f3_9b4e_4e1d_80ce_4d23da6b1fbf"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_098b74f3_9b4e_4e1d_80ce_4d23da6b1fbf.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-7.499987, 0.1000004, -14.92499)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_7_60m_d63f9333_c801_4b53_b29c_a3f6a8424447"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_7_70m_9a969da8_310a_4e9b_b0e4_ea0525b1c0c8"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_8_00m_d79d02df_9f0a_4342_84c3_47809e3a71d8"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_8_50m_2bcda0cd_c770_4cc6_8c39_eacd0ec46f5a"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_9_00m_b551ec3d_0611_4684_90c3_f97352ab8860"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_9_50m_dc6670ca_89a3_4dda_a873_b83b34ba95e4"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_10_00m_843002d1_a512_4c13_8b1a_039216aa0bd1"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_10_50m_1c190799_0075_4dc6_99ff_30c7cae9adf1"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_10_60m_2cde5c94_ff53_4b0e_8033_f6306d61def6"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_11_00m_e4978289_21fd_4fdd_8d61_376d8c5734b3"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_11_50m_637edbf6_1375_4b2f_8230_2fc54d9ab233"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_12_00m_56794399_5469_4006_b590_d25ea6b4d458"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_12_10m_0831d8e1_5c77_4f12_9347_43f98f05d237"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_12_50m_d2d32e49_e28a_4450_a707_113ca568157d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_12_90m_09ac159c_8be3_4dd6_89cc_b5e04b9f392c"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_13_00m_615f4eec_0cf5_4d84_aae1_9bd1e9e5960d"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_13_10m_507ba9cb_a4b5_4f0d_9812_1f964416b1fe"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_15_00m_d39c76af_0f7b_4dc3_be57_2176bfcb2a2e"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, 15, -20)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_93d1b844_2267_4582_bbaf_cec7f5885124"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_93d1b844_2267_4582_bbaf_cec7f5885124.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.1000023, -5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_c3f9ed7f_2467_4e3e_9106_c4c52e8e9607"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_c3f9ed7f_2467_4e3e_9106_c4c52e8e9607.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-5, 0.1000023, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_3cc297a9_a6f0_4662_a3ba_cc87812606bd"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_3cc297a9_a6f0_4662_a3ba_cc87812606bd.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.1000023, 5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_09529110_a714_475a_bc9f_f4d9d485916d"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_09529110_a714_475a_bc9f_f4d9d485916d.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (5, 0.1000023, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_9b6b08bd_3d4f_4a6e_aa79_4591ad321ae9"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_9b6b08bd_3d4f_4a6e_aa79_4591ad321ae9.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.1000023, -2)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_0b289d9f_344b_4398_aa02_865912fa17a9"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_0b289d9f_344b_4398_aa02_865912fa17a9.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2, 0.1000023, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_23a72ae9_8d89_4a5e_963d_08b7df8726d7"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_23a72ae9_8d89_4a5e_963d_08b7df8726d7.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.1000023, 2)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_d542b442_4fb4_4198_b282_7fa8e0c23a93"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_d542b442_4fb4_4198_b282_7fa8e0c23a93.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2, 0.1000023, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_3df0d6cb_8030_4692_8077_62548b261095"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_3df0d6cb_8030_4692_8077_62548b261095.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.1000023, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_16_00m_996f5fe6_bcbf_46f8_8a32_06e28c65c61c"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_20_00m_96d644ab_d313_4da6_a1b0_a16265c0d99f"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, 20, -20)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Wall_70c19a93_78d8_41c7_848e_e1d856fea720"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_70c19a93_78d8_41c7_848e_e1d856fea720.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.09999847, -2)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_243e7b87_4aa5_4d8c_b3fe_49e2e0d55aa5"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_243e7b87_4aa5_4d8c_b3fe_49e2e0d55aa5.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.09999847, -0.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_a9b4e545_776e_42dd_84ef_ee4e2d65fc25"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_a9b4e545_776e_42dd_84ef_ee4e2d65fc25.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0.5, 0.09999847, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_82bff049_c119_4cd5_8d80_e3e21edc0f6b"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_82bff049_c119_4cd5_8d80_e3e21edc0f6b.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.09999847, 0.5)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_73997c5a_e36d_4876_88e3_102005ea44f3"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_73997c5a_e36d_4876_88e3_102005ea44f3.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-0.5, 0.09999847, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_aadbb575_ec38_47d9_8e24_4d77a0f932c1"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_aadbb575_ec38_47d9_8e24_4d77a0f932c1.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (2, 0.09999847, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_82257f2f_d130_4c14_8e7c_0b3c94c85bee"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_82257f2f_d130_4c14_8e7c_0b3c94c85bee.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.09999847, 2)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Wall_ed7e2ce0_ef03_4414_a7a1_fc95e83dddeb"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Wall_ed7e2ce0_ef03_4414_a7a1_fc95e83dddeb.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (-2, 0.09999847, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Wall_Standard>
+				
+				
+				
+			}
+			def "Floor_Object_2f542575_dc66_4af2_a34c_7e4dc619e748"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_2f542575_dc66_4af2_a34c_7e4dc619e748.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0.09999847, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_21_00m_e19ffa36_fb70_43c5_afcb_bcd91f925789"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_21_70m_84c58f49_057a_4618_a121_94ed2711e6c7"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		def Xform "Floor_22_50m_3bb8cd9c_7e9f_406c_b805_44129ed367c2"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (0, 22.6, -20)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			def "Floor_Object_6684dced_3c2e_42dc_b152_3bf4525da26c"
+			(
+				instanceable = "false"
+				prepend references = @meshes/Floor_Object_6684dced_3c2e_42dc_b152_3bf4525da26c.usda@
+			)
+			{
+				float3 xformOp:rotateZYX = (0, 0, 0)
+				float3 xformOp:scale = (1, 1, 1)
+				double3 xformOp:translate = (0, 0, 0)
+				uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+				rel material:binding = </World/Materials/PREVIEW_Floor_Standard>
+				
+				
+				
+			}
+			
+		}
+		def Xform "Floor_25_00m_0634eb7f_082e_4764_86ef_93e276e537fc"
+		{
+			float3 xformOp:rotateZYX = (0, 0, 0)
+			float3 xformOp:scale = (1, 1, 1)
+			double3 xformOp:translate = (27, 0.09999943, 3)
+			uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+			
+			
+		}
+		
+	}
+	def Xform "Materials"
+	{
+		def Material "PREVIEW_Wall_Standard"
+		{
+			token inputs:frame:stPrimvarName = "st"
+			token outputs:surface.connect = </World/Materials/PREVIEW_Wall_Standard/PBRShader.outputs:surface>
+			
+			def Shader "PBRShader"
+			{
+				uniform token info:id = "UsdPreviewSurface"
+				color3f inputs:diffuseColor = (0.929, 0.7126986, 0.184871)
+				token outputs:surface
+			}
+			
+		}
+		def Material "PREVIEW_Floor_Standard"
+		{
+			token inputs:frame:stPrimvarName = "st"
+			token outputs:surface.connect = </World/Materials/PREVIEW_Floor_Standard/PBRShader.outputs:surface>
+			
+			def Shader "PBRShader"
+			{
+				uniform token info:id = "UsdPreviewSurface"
+				color3f inputs:diffuseColor = (0.4711347, 0.716, 0.360864)
+				token outputs:surface
+			}
+			
+		}
+		def Material "PREVIEW_Stair_Standard"
+		{
+			token inputs:frame:stPrimvarName = "st"
+			token outputs:surface.connect = </World/Materials/PREVIEW_Stair_Standard/PBRShader.outputs:surface>
+			
+			def Shader "PBRShader"
+			{
+				uniform token info:id = "UsdPreviewSurface"
+				color3f inputs:diffuseColor = (0.872, 0.4879852, 0.38368)
+				token outputs:surface
+			}
+			
+		}
+		
+	}
+	
+}

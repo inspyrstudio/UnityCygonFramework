@@ -71,3 +71,20 @@ on infos found in the usda.
 ### Fixed ###
 
 - Imported meshes rendered inside-out (only back-faces visible). Triangle winding now respects the source `leftHanded` orientation, so faces display correctly.
+
+## [0.1.6-preview]
+
+### Added ###
+
+- Multi-material meshes: geometry partitioned with USD `GeomSubset` is now imported as one submesh per subset, each bound to its own material. Previously a multi-material object received only a single material.
+- Add Documentation
+
+### Changed ###
+
+- The shared `misc` assembly is now constrained to the **Editor** platform (editor and runtime assemblies already were), so no plugin code is compiled into player builds.
+- Removed the unused `Unity.VisualScripting` dependency (assembly references and `using`) and dead code in the importer (unused color/texture lookup caches and their helper).
+- Material textures (base color, normal, displacement) are now resolved from the USD material graph via the surface shader's `inputs:` connections instead of by filename convention`.
+
+### Fixed ###
+
+- A stray `World.mat` was generated from the scene's non-material content; only real `def Material` blocks are processed now.
