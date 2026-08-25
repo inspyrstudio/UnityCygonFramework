@@ -312,6 +312,8 @@ namespace InspyrStudio.CygonLink
             Mesh mesh = BuildMeshFromUsda(block, out List<string> subsetNames);
             if (mesh == null) return;
             
+            ApplyMeshPrimOffset(mesh, lines, start, end, owner.name);
+            
             mesh.name = owner.name;
             ctx.AddObjectToAsset(owner.name + "_m", mesh);
             
@@ -320,6 +322,51 @@ namespace InspyrStudio.CygonLink
             _instanceSubsets[owner] = subsetNames;
             
             CaptureSubsetBindings(block, owner);
+        }
+
+        /// <summary>
+        /// Bakes the mesh prim's own transform into its vertices. Only a translation is baked: the
+        /// exporter uses this op purely to offset geometry from its pivot, and a rotation or scale
+        /// there is reported rather than silently dropped.
+        /// </summary>
+        /// <param name="mesh">The freshly built mesh, modified in place</param>
+        /// <param name="lines">All lines of the scene USDA</param>
+        /// <param name="start">Index of the <c>def Mesh</c> line</param>
+        /// <param name="end">Index of the line closing the mesh block</param>
+        /// <param name="ownerName">Name of the enclosing prim, used for log message</param>
+        private void ApplyMeshPrimOffset(Mesh mesh, string[] lines, int start, int end, string ownerName)
+        {
+            Vector3 offset = Vector3.zero;
+            
+            for (int i = start + 1; i <= end; i++)
+            {
+                string trimmed = lines[i].Trim();
+                
+                // Only the mesh prim's own ops count; stop at its first nested prim (a GeomSubset).
+                if (trimmed.StartsWith("def ")) break;
+                if (trimmed.Contains("xformOpOrder")) continue;
+                
+                if (trimmed.Contains("xformOp:translate"))
+                {
+                    offset = ParseVector3FromLine(trimmed, true);
+                }
+                else if (trimmed.Contains("xformOp:rotate") && ParseRotationFromLine(trimmed) != Vector3.zero)
+                {
+                    EditorRuntime_USDA.SendLog("orange", $"'{ownerName}': rotation on the mesh prim is not applied.");
+                }
+                else if (trimmed.Contains("xformOp:scale") && ParseVector3FromLine(trimmed, false) != Vector3.one)
+                {
+                    EditorRuntime_USDA.SendLog("orange", $"'{ownerName}': scale on the mesh prim is not applied.");
+                }
+            }
+            
+            if (offset == Vector3.zero) return;
+            
+            Vector3[] verts = mesh.vertices;
+            for (int i = 0; i < verts.Length; i++) verts[i] += offset;
+            
+            mesh.vertices = verts;
+            mesh.RecalculateBounds();
         }
 
         /// <summary>
@@ -557,7 +604,7 @@ namespace InspyrStudio.CygonLink
             return flipZ ? Vector3.zero : Vector3.one;
         }
 
-        /// <summary>Parses a rotation <c>(x, y, z)</c> tuple, negating Y/Z to convert to Unity's convention.</summary>
+        /// <summary>Parses a rotation <c>(x, y, z)</c> tuple and converts it to Unity's handedness.</summary>
         /// <param name="line">The line containing a <c>(x, y, z)</c> rotation tuple.</param>
         /// <returns>The Euler angles in Unity's convention, or zero when no tuple is found.</returns>
         private Vector3 ParseRotationFromLine(string line)
@@ -569,7 +616,8 @@ namespace InspyrStudio.CygonLink
                 float x = float.Parse(p[0].Trim(), CultureInfo.InvariantCulture);
                 float y = float.Parse(p[1].Trim(), CultureInfo.InvariantCulture);
                 float z = float.Parse(p[2].Trim(), CultureInfo.InvariantCulture);
-                return new Vector3(x, -y, -z);
+                
+                return new Vector3(-x, -y, z);
             }
             return Vector3.zero;
         }
