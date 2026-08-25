@@ -94,3 +94,19 @@ on infos found in the usda.
 ### Fixed ###
 - Objects were placed at the wrong world position, most visibly losing the height of the floor they belong to (Y snapping to 0), and sometimes X/Z as well. The hierarchy stack pushed a frame only when a block introduced a GameObject but popped on every closing brace, so each `over` block (used for per-face material bindings) leaked one level. The stack drifted upward and later prims were parented to an ancestor, losing their parent's offset. Every block now pushes exactly one frame, so pushes and pops always balance.
 - Transform operations are now tracked per (object, operation) pair instead of `instanceID + 1/2/3` keys in a shared set, where objects with nearby instance IDs could collide and have an `xformOp` silently skipped. The `xformOpOrder` declaration line is also ignored explicitly rather than being parsed as a value.
+
+## [0.1.8]
+
+### Added ###
+
+- Support for the single-file export, where meshes are embedded in the scene USDA as inline `def Mesh` prims and their per-face materials are bound by the `GeomSubset` prims themselves. Such a scene used to import as one merged mesh with no materials, because any file holding geometry was taken for a standalone mesh file. A mesh prim's own transform is honoured too, so geometry offset from its pivot keeps that offset (a rotation or scale there, which the exporter does not currently write, is reported rather than silently dropped). Scenes that reference separate mesh files keep working.
+
+### Changed ###
+
+- Entering and leaving play mode no longer reimports every `.usda` in the project. The play-mode hook ignored which transition had occurred and force-reimported every file on all four of them. Returning to edit mode now only re-applies the files that actually changed while playing, and re-applies them without reimporting. Live updates while in play mode are unaffected: they come from the file watcher, not from this hook.
+- `Force Refresh` now only touches Cygon `.usda` files instead of every `.usda` in the project.
+- A prim-level `rel material:binding` now targets the prim whose block declares it rather than the last mesh instance seen, which the single-file export only establishes after the binding line.
+- `xformOp:rotateZXY` is recognized alongside `xformOp:rotateZYX`; the single-file export writes the former, and an unmatched name silently dropped the rotation.
+
+### Fixed ###
+- Rotations were wrong on any object not rotated purely around the up axis. Converting from USD (right-handed, Y up) to Unity (left-handed) mirrors Z, which negates the angles about X and Y and leaves the angle about Z alone; the importer negated Y and Z instead. Rotations around Y only came out the same either way, which is why props lying flat looked correct while tilted ones did not. The wrong conversion is older than this release but stayed invisible: earlier exports only wrote zero rotations, and the importer recognised `xformOp:rotateZYX` alone.
