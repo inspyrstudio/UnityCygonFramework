@@ -27,7 +27,8 @@ namespace InspyrStudio.CygonLink
 
         private Dictionary<string, Mesh> _meshCache = new ();
         private Dictionary<string, List<string>> _meshSubsets = new ();
-        private Dictionary<GameObject, string> _instanceMeshPath = new ();
+        private Dictionary<GameObject, Mesh> _instanceMesh = new ();
+        private Dictionary<GameObject, List<string>> _instanceSubsets = new ();
         private Dictionary<GameObject, string> _singleBindings = new ();
         private Dictionary<GameObject, Dictionary<string, string>> _subsetBindings = new ();
 
@@ -43,7 +44,7 @@ namespace InspyrStudio.CygonLink
 
         /// <summary>
         /// Entry point called by Unity. Ignores non-Cygon files, then dispatches to the single-mesh
-        /// or scene importer depending on whether the file contains raw geometry.
+        /// or the scene importer.
         /// </summary>
         /// <param name="ctx">The import context Unity provides for the asset being imported.</param>
         public override void OnImportAsset(AssetImportContext ctx)
@@ -56,8 +57,7 @@ namespace InspyrStudio.CygonLink
             string rawText = File.ReadAllText(ctx.assetPath);
             string fileName = Path.GetFileNameWithoutExtension(ctx.assetPath);
             
-            // A mesh file has raw geometry; a scene file only references meshes + materials.
-            if (rawText.Contains("point3f[] points"))
+            if (IsStandaloneMeshFile(rawText))
                 ImportAsSingleMesh(ctx, rawText, fileName);
             else
                 ImportAsScene(ctx, rawText, fileName);
@@ -68,9 +68,40 @@ namespace InspyrStudio.CygonLink
         {
             _meshCache.Clear();
             _meshSubsets.Clear();
-            _instanceMeshPath.Clear();
+            _instanceMesh.Clear();
+            _instanceSubsets.Clear();
             _singleBindings.Clear();
             _subsetBindings.Clear();
+        }
+
+        /// <summary>
+        /// Tells a standalone mesh file (raw geometry only, referenced by a scene) from a scene file.
+        /// A scene declares materials, references other files, or holds several meshes; since the
+        /// single-file export embeds its meshes, geometry alone no longer identifies a mesh file.
+        /// </summary>
+        /// <param name="rawText">Full text of the USDA.</param>
+        /// <returns>True when the file is a standalone mesh and can be imported as one object.</returns>
+        private static bool IsStandaloneMeshFile(string rawText)
+        {
+            if (!rawText.Contains("point3f[] points")) return false;
+            if (rawText.Contains("def Material")) return false;
+            if (rawText.Contains("prepend references")) return false;
+            return CountOccurrences(rawText, "def Mesh ") <= 1;
+        }
+
+        /// <summary>Counts the non-overlapping occurrences of a substring.</summary>
+        /// <param name="text">The text to scan.</param>
+        /// <param name="token">The substring to count.</param>
+        /// <returns>How many times <paramref name="token"/> occurs in <paramref name="text"/>.</returns>
+        private static int CountOccurrences(string text, string token)
+        {
+            int count = 0, i = 0;
+            while ((i = text.IndexOf(token, i, StringComparison.Ordinal)) != -1)
+            {
+                count++;
+                i += token.Length;
+            }
+            return count;
         }
 
         /// <summary>Imports a standalone mesh USDA as a single GameObject with a mesh + renderer.</summary>
@@ -140,11 +171,28 @@ namespace InspyrStudio.CygonLink
             GameObject lastMeshInstance = null;
             string currentSubset = null;
             
-            foreach (string line in lines)
+            for (int li = 0; li < lines.Length; li++)
             {
-                string trimmed = line.Trim();
+                string trimmed = lines[li].Trim();
                 if (string.IsNullOrEmpty(trimmed) || trimmed.StartsWith("#")) continue;
-                
+
+                // Inline mesh (single-file export): build it from its own block and attach it to the
+                // enclosing prim, then skip the block so its geometry is not read as scene properties
+                // (and so its braces cannot unbalance the hierarchy stack).
+                if (trimmed.StartsWith("def Mesh "))
+                {
+                    int blockEnd = FindBlockEnd(lines, li);
+                    GameObject owner = parentStack.Peek();
+                    if (owner != rootContainer)
+                    {
+                        ApplyInlineMesh(ctx, owner, lines, li, blockEnd);
+                        lastMeshInstance = owner;
+                    }
+                    li = blockEnd;
+                    activeTarget = null;
+                    continue;
+                }
+
                 // Definition: spawn a GameObject (unless it's a material/shader prim).
                 if (trimmed.StartsWith("def "))
                 {
@@ -170,7 +218,12 @@ namespace InspyrStudio.CygonLink
                 
                 if (trimmed.Contains("rel material:binding"))
                 {
-                    CaptureMaterialBinding(trimmed, lastMeshInstance, currentSubset);
+                    // A subset binding belongs to the mesh being overridden, so it targets the last mesh
+                    // instance. A prim-level binding belongs to the prim whose block we are inside, which
+                    // is the stack top: in the single-file export it is declared before the inline mesh,
+                    // so lastMeshInstance is not set yet and would point at the previous object.
+                    GameObject bindingTarget = currentSubset != null ? lastMeshInstance : parentStack.Peek();
+                    if (bindingTarget != rootContainer) CaptureMaterialBinding(trimmed, bindingTarget, currentSubset);
                     continue;
                 }
                 
@@ -220,6 +273,97 @@ namespace InspyrStudio.CygonLink
             return go;
         }
 
+        /// <summary>Finds the line that closes the block opened at or after <paramref name="start"/></summary>
+        /// <param name="lines">All lines of the file being parsed</param>
+        /// <param name="start">Index of the prim declaration line</param>
+        /// <returns>Index of the matching closing brace, or the last line when the block is unterminated</returns>
+        private static int FindBlockEnd(string[] lines, int start)
+        {
+            int depth = 0;
+            bool opened = false;
+            
+            for (int i = start; i < lines.Length; i++)
+            {
+                foreach (char c in lines[i])
+                {
+                    if (c == '{') { depth++; opened = true; }
+                    else if (c == '}') depth--;
+                }
+                
+                if (opened && depth <= 0) return i;
+            }
+            
+            return lines.Length - 1;
+        }
+
+        /// <summary>
+        /// Builds a mesh from an inline <c>def Mesh</c> block (single-file export) and attaches it to the
+        /// prim enclosing it, along with the material bindings its GeomSubsets declare
+        /// </summary>
+        /// <param name="ctx">The import context (registers the mesh as a sub-asset)</param>
+        /// <param name="owner">The enclosing prim's GameObject, which receives the mesh</param>
+        /// <param name="lines">All lines of the scene USDA</param>
+        /// <param name="start">Index of the <c>def Mesh</c> line</param>
+        /// <param name="end">Index of the line closing the mesh block</param>
+        private void ApplyInlineMesh(AssetImportContext ctx, GameObject owner, string[] lines, int start, int end)
+        {
+            string block = string.Join("\n", lines, start, end - start + 1);
+            
+            Mesh mesh = BuildMeshFromUsda(block, out List<string> subsetNames);
+            if (mesh == null) return;
+            
+            mesh.name = owner.name;
+            ctx.AddObjectToAsset(owner.name + "_m", mesh);
+            
+            AttachMesh(owner, mesh);
+            _instanceMesh[owner] = mesh;
+            _instanceSubsets[owner] = subsetNames;
+            
+            CaptureSubsetBindings(block, owner);
+        }
+
+        /// <summary>
+        /// Records the material bound by each <c>def GeomSubset</c> of an inline mesh block. In the
+        /// single-file export the binding sits in the subset prim itself rather than in an "over" block
+        /// </summary>
+        /// <param name="block">Text of the <c>def Mesh</c> block</param>
+        /// <param name="owner">The GameObject carrying the mesh</param>
+        private void CaptureSubsetBindings(string block, GameObject owner)
+        {
+            string subset = null;
+            
+            foreach (string raw in block.Split('\n'))
+            {
+                string trimmed = raw.Trim();
+                
+                if (trimmed.StartsWith("def GeomSubset"))
+                {
+                    Match m = Regex.Match(trimmed, "\"([^\"]+)\"");
+                    subset = m.Success ? m.Groups[1].Value : null;
+                }
+                else if (subset != null && trimmed.Contains("rel material:binding"))
+                {
+                    CaptureMaterialBinding(trimmed, owner, subset);
+                    subset = null;
+                }
+            }
+        }
+
+        /// <summary>Wires a mesh onto a GameObject with a renderer and a matching collider</summary>
+        /// <param name="target">The GameObject that receives the components</param>
+        /// <param name="mesh">The mesh to attach</param>
+        private static void AttachMesh(GameObject target, Mesh mesh)
+        {
+            if (!target.GetComponent<MeshFilter>()) target.AddComponent<MeshFilter>().sharedMesh = mesh;
+            
+            MeshRenderer mr = target.GetComponent<MeshRenderer>();
+            if (mr == null) mr = target.AddComponent<MeshRenderer>();
+            mr.shadowCastingMode = ShadowCastingMode.TwoSided;
+            
+            MeshCollider mc = target.AddComponent<MeshCollider>();
+            mc.sharedMesh = mesh;
+        }
+
         /// <summary>
         /// Resolves the subset targeted by an "over" line, matching it against the known GeomSubsets
         /// of the instance's mesh.
@@ -233,8 +377,7 @@ namespace InspyrStudio.CygonLink
             string overName = om.Success ? om.Groups[1].Value : null;
             
             if (overName != null && instance != null &&
-                _instanceMeshPath.TryGetValue(instance, out string meshPath) &&
-                _meshSubsets.TryGetValue(meshPath, out List<string> subsets) &&
+                _instanceSubsets.TryGetValue(instance, out List<string> subsets) &&
                 subsets != null && subsets.Contains(overName))
             {
                 return overName;
@@ -271,7 +414,8 @@ namespace InspyrStudio.CygonLink
                 return true;
             }
             
-            if (trimmed.Contains("xformOp:rotateZYX") && finalized.Add((objID, TransformOp.Rotate)))
+            // Matches any rotate variant
+            if (trimmed.Contains("xformOp:rotate") && finalized.Add((objID, TransformOp.Rotate)))
             {
                 target.transform.localEulerAngles = ParseRotationFromLine(trimmed);
                 return true;
@@ -324,20 +468,20 @@ namespace InspyrStudio.CygonLink
         /// <param name="ctx">The import context (used to load and depend on the .mat assets).</param>
         private void ApplyMaterialsToInstances(AssetImportContext ctx)
         {
-            foreach (KeyValuePair<GameObject, string> kv in _instanceMeshPath)
+            int multiMaterial = 0;
+            
+            foreach (KeyValuePair<GameObject, Mesh> kv in _instanceMesh)
             {
                 GameObject inst = kv.Key;
-                string meshPath = kv.Value;
+                Mesh mesh = kv.Value;
                 if (inst == null) continue;
                 
                 MeshRenderer renderer = inst.GetComponent<MeshRenderer>();
                 if (renderer == null) renderer = inst.AddComponent<MeshRenderer>();
                 
-                int subMeshCount = 1;
-                if (_meshCache.TryGetValue(meshPath, out Mesh mesh) && mesh != null)
-                    subMeshCount = Mathf.Max(1, mesh.subMeshCount);
+                int subMeshCount = mesh != null ? Mathf.Max(1, mesh.subMeshCount) : 1;
                 
-                _meshSubsets.TryGetValue(meshPath, out List<string> subsetNames);
+                _instanceSubsets.TryGetValue(inst, out List<string> subsetNames);
                 _subsetBindings.TryGetValue(inst, out Dictionary<string, string> subBinds);
                 _singleBindings.TryGetValue(inst, out string singleMat);
                 
@@ -357,7 +501,7 @@ namespace InspyrStudio.CygonLink
                         mats[si] = LoadMaterial(matName, ctx);
                     }
                     
-                    EditorRuntime_USDA.SendLog("green", $"'{inst.name}': {subMeshCount} materials assigned.");
+                    multiMaterial++;
                 }
                 else
                 {
@@ -367,6 +511,8 @@ namespace InspyrStudio.CygonLink
                 
                 renderer.sharedMaterials = mats;
             }
+            
+            EditorRuntime_USDA.SendLog("green", $"{_instanceMesh.Count} meshes bound ({multiMaterial} with per-face materials).");
         }
 
         /// <summary>Loads a generated material by name from the sibling "materials" folder.</summary>
@@ -540,18 +686,11 @@ namespace InspyrStudio.CygonLink
             
             if (_meshCache.TryGetValue(fullPath, out Mesh mesh))
             {
-                // Remember which mesh this instance uses so materials can be assigned
-                // once the whole scene (including per-subset bindings) has been parsed.
-                _instanceMeshPath[target] = fullPath;
+                _instanceMesh[target] = mesh;
+                _meshSubsets.TryGetValue(fullPath, out List<string> subsetNames);
+                _instanceSubsets[target] = subsetNames;
                 
-                if (!target.GetComponent<MeshFilter>()) target.AddComponent<MeshFilter>().sharedMesh = mesh;
-                
-                MeshRenderer mr = target.GetComponent<MeshRenderer>();
-                if (mr == null) mr = target.AddComponent<MeshRenderer>();
-                mr.shadowCastingMode = ShadowCastingMode.TwoSided;
-                
-                MeshCollider mc = target.AddComponent<MeshCollider>();
-                mc.sharedMesh = mesh;
+                AttachMesh(target, mesh);
             }
         }
 
