@@ -9,7 +9,8 @@ namespace InspyrStudio.CygonLink
 {
     /// <summary>
     /// Editor auto-sync: watches the Assets folder for .usda changes and refreshes any matching
-    /// scene instances (also runs on play-mode transitions and via a menu command).
+    /// scene instances. Returning to edit mode re-applies whatever changed while playing, and a menu
+    /// command forces a full refresh.
     /// </summary>
     [InitializeOnLoad] public class RuntimeSync_USDA
     {
@@ -20,6 +21,9 @@ namespace InspyrStudio.CygonLink
         #region VARIABLES
 
         private static FileSystemWatcher projectWatcher;
+
+        /// <summary>SessionState key holding the files changed during play mode, one path per line.</summary>
+        private const string PendingSyncKey = "CygonLink.PendingSceneSync";
 
         #endregion
 
@@ -71,16 +75,15 @@ namespace InspyrStudio.CygonLink
             RefreshAll();
         }
 
-        /// <summary>Re-imports every .usda file under Assets and refreshes its scene instances.</summary>
+        /// <summary>Re-imports every Cygon .usda file under Assets and refreshes its scene instances</summary>
         private static void RefreshAll()
         {
-            // Search the physical disk for all .usda files within the Assets folder.
-            // This is more reliable than FindAssets for custom extensions.
-            string[] files = Directory.GetFiles(Application.dataPath, "*.usda", SearchOption.AllDirectories);
+            // Scanning the disk is more reliable than FindAssets for custom extensions. Only Cygon files are touched, so unrelated .usda assets are left alone.
+            List<string> files = CygonUsda.FindAll();
             
-            if (files.Length == 0)
+            if (files.Count == 0)
             {
-                EditorRuntime_USDA.SendLog("yellow", "No .usda files found to refresh.");
+                EditorRuntime_USDA.SendLog("yellow", "No Cygon .usda files found to refresh.");
                 return;
             }
             
@@ -89,7 +92,7 @@ namespace InspyrStudio.CygonLink
                 RefreshSceneInstances(fullPath);
             }
             
-            EditorRuntime_USDA.SendLog("green", $"Forced refresh complete. Processed {files.Length} files.");
+            EditorRuntime_USDA.SendLog("green", $"Forced refresh complete. Processed {files.Count} files.");
         }
 
         /// <summary>Re-imports one USDA and updates every matching scene GameObject.</summary>
@@ -107,15 +110,21 @@ namespace InspyrStudio.CygonLink
             
             EditorRuntime_USDA.SendLog("orange", $"Refreshing {assetPath}...");
             
-            // 1. Force the import
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+            SyncSceneInstances(assetPath);
+        }
+
+        /// <summary>
+        /// Re-applies an already-imported asset onto its scene instances, without reimporting it.
+        /// Used when the asset on disk is known to be up to date and only the scene has gone stale.
+        /// </summary>
+        /// <param name="assetPath">Project-relative path of the imported USDA asset</param>
+        private static void SyncSceneInstances(string assetPath)
+        {
+            GameObject asset = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+            if (asset == null) return;
             
-            // 2. Load the prefab
-            GameObject updatedAsset = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
-            if (updatedAsset == null) return;
-            
-            // 3. Update matching scene objects
-            RefreshMatchingInstances(Path.GetFileNameWithoutExtension(assetPath), updatedAsset);
+            RefreshMatchingInstances(Path.GetFileNameWithoutExtension(assetPath), asset);
         }
 
         /// <summary>Updates every scene GameObject whose name matches the asset (or its "(Clone)" variant).</summary>
@@ -181,16 +190,62 @@ namespace InspyrStudio.CygonLink
 
 
         //=============================================================================
+        // PENDING SYNC
+        //=============================================================================
+
+        #region PENDING SYNC
+
+        /// <summary>
+        /// Remembers a file whose scene instances will need re-applying. Kept in
+        /// <see cref="SessionState"/> rather than a static field because both entering and leaving
+        /// play mode reload the domain, which resets static state.
+        /// </summary>
+        /// <param name="assetPath">Project-relative path of the changed USDA asset</param>
+        private static void AddPendingSync(string assetPath)
+        {
+            List<string> pending = LoadPendingSync();
+            if (pending.Contains(assetPath)) return;
+            
+            pending.Add(assetPath);
+            SessionState.SetString(PendingSyncKey, string.Join("\n", pending));
+        }
+
+        /// <summary>Reads the files awaiting a scene re-apply.</summary>
+        /// <returns>The pending asset paths; empty when there is nothing to re-apply</returns>
+        private static List<string> LoadPendingSync()
+        {
+            string raw = SessionState.GetString(PendingSyncKey, string.Empty);
+            
+            return string.IsNullOrEmpty(raw) ? new List<string>() : new List<string>(raw.Split('\n'));
+        }
+
+        #endregion
+
+
+
+        //=============================================================================
         // CALLBACKS
         //=============================================================================
 
         #region CALLBACKS
 
-        /// <summary>Refreshes everything when entering or exiting play mode.</summary>
-        /// <param name="state">The play-mode transition reported by the editor.</param>
+        /// <summary>
+        /// Re-applies the files that changed during play mode once the editor is back in edit mode.
+        /// Leaving play mode restores the pre-play scene, which discards the updates applied while
+        /// playing; the assets themselves were already imported, so nothing is reimported here.
+        /// </summary>
+        /// <param name="state">The play-mode transition reported by the editor</param>
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
-            RefreshAll();
+            if (state != PlayModeStateChange.EnteredEditMode) return;
+            
+            List<string> pending = LoadPendingSync();
+            if (pending.Count == 0) return;
+            
+            foreach (string assetPath in pending) SyncSceneInstances(assetPath);
+            
+            SessionState.EraseString(PendingSyncKey);
+            EditorRuntime_USDA.SendLog("green", $"Re-applied {pending.Count} file(s) changed during play mode.");
         }
 
         /// <summary>Watcher callback (fires on a background thread) — marshals the refresh onto the main thread.</summary>
@@ -202,6 +257,8 @@ namespace InspyrStudio.CygonLink
             // We must move back to the Main Thread for Unity API calls.
             EditorApplication.delayCall += () =>
             {
+                if (EditorApplication.isPlaying) AddPendingSync(CygonUsda.ToAssetPath(e.FullPath));
+                
                 RefreshSceneInstances(e.FullPath);
             };
         }
