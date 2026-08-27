@@ -99,6 +99,7 @@ on infos found in the usda.
 
 ### Added ###
 
+- Support for the library export, where meshes live once in a `class` prim and instances point at them with an internal reference such as `prepend references = </World/Meshes/Wall>`. A referenced mesh is built once and shared by every instance that uses it, and `class` prims are skipped by the hierarchy pass so a library spawns no objects of its own. Material bindings are also inherited from ancestor prims, as USD intends: this export binds the material on the prim whose child carries the reference, so a binding and its mesh no longer have to sit on the same prim. Together with the two earlier layouts, a `references` line now resolves to an external file (`@meshes/Wall.usda@`) or to a prim inside the same file, and meshes may still be declared inline.
 - Support for the single-file export, where meshes are embedded in the scene USDA as inline `def Mesh` prims and their per-face materials are bound by the `GeomSubset` prims themselves. Such a scene used to import as one merged mesh with no materials, because any file holding geometry was taken for a standalone mesh file. A mesh prim's own transform is honoured too, so geometry offset from its pivot keeps that offset (a rotation or scale there, which the exporter does not currently write, is reported rather than silently dropped). Scenes that reference separate mesh files keep working.
 
 ### Changed ###
